@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Krystle's Kitchen</title>
+  <meta name="description" content="A beginner-friendly herbal remedy guide covering 11 body systems, 22 original remedies, and cited additions from traditional herbalists.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,500;0,8..60,600;1,8..60,500&display=swap" rel="stylesheet">
+  <style>
+
+:root {
+  --bg: #f3ead8; --paper: #fffaf1; --ink: #2a2318; --muted: #5c5346;
+  --green: #3c5a3a; --green-dark: #2a4129; --green-soft: #e7efe4;
+  --terracotta: #9a4a2c; --terracotta-soft: #f4e4dc; --gold: #c4a265;
+  --gold-soft: #f3e6c8; --line: #d9cbaf; --shadow: 0 10px 30px rgba(42,35,24,.08);
+  --sans: "Source Sans 3", "Source Sans Pro", "Segoe UI", sans-serif;
+  --serif: "Source Serif 4", "Source Serif Pro", "Palatino Linotype", "Times New Roman", serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: radial-gradient(1200px 500px at 10% -10%, #efe3c8 0%, transparent 60%),
+              linear-gradient(180deg, #f7f0e0 0%, var(--bg) 180px);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+a { color: var(--green-dark); }
+a:hover { color: var(--terracotta); }
+.wrap {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 880px);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 4rem;
+  align-items: start;
+}
+.toc {
+  position: sticky; top: .8rem;
+  max-height: calc(100vh - 1.6rem);
+  overflow: auto;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 1rem 1rem 1.1rem;
+  box-shadow: var(--shadow);
+}
+.toc h2 { font-family: var(--serif); font-size: 1.05rem; margin: 0 0 .6rem; color: var(--green-dark); }
+.toc a { display:block; text-decoration:none; color:var(--muted); font-size:.88rem; line-height:1.35; padding:.22rem .3rem; border-radius:6px; }
+.toc a:hover, .toc a:focus { background: var(--green-soft); color: var(--green-dark); }
+.toc .sub { padding-left: .85rem; font-size: .82rem; }
+.toc-toggle { display: none; }
+.content { min-width: 0; }
+.hero {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 2.1rem 2rem 1.6rem;
+  box-shadow: var(--shadow);
+  margin-bottom: 1.4rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute; left:0; top:0; bottom:0; width:10px;
+  background: linear-gradient(180deg, var(--green) 0%, var(--gold) 60%, var(--terracotta) 100%);
+}
+.hero .kicker { text-transform:uppercase; letter-spacing:.12em; font-size:.76rem; color:var(--terracotta); margin:0 0 .4rem; font-weight:650; }
+.hero h1 { font-family:var(--serif); font-weight:600; font-size:clamp(2rem,4vw,3rem); line-height:1.15; margin:0 0 .7rem; color:var(--green-dark); }
+.lede { font-size:1.12rem; color:var(--muted); margin:0; }
+.article-flow p { margin:.7rem 0; }
+h2 { font-family:var(--serif); color:var(--green-dark); font-size:1.85rem; margin:2.2rem 0 .8rem; padding-top:.4rem; border-top:1px solid var(--line); }
+h3 { font-family:var(--serif); color:var(--green); font-size:1.4rem; margin:1.6rem 0 .6rem; }
+h3.system-title { background:var(--green-soft); border-radius:12px; padding:.55rem .85rem; color:var(--green-dark); }
+h4 { margin:.9rem 0 .35rem; color:var(--ink); }
+hr { border:0; border-top:1px dashed var(--line); margin:1.6rem 0; }
+.table-wrap { overflow-x:auto; margin:1rem 0 1.3rem; }
+table { width:100%; border-collapse:collapse; background:var(--paper); font-size:.95rem; }
+th, td { border:1px solid var(--line); padding:.55rem .65rem; text-align:left; vertical-align:top; }
+th { background:var(--green); color:#f7f4ea; font-weight:650; }
+tbody tr:nth-child(even) { background:#fbf6ea; }
+.remedy { background:var(--paper); border:1px solid var(--line); border-radius:16px; padding:.9rem 1.1rem 1.1rem; margin:1rem 0 1.3rem; box-shadow:var(--shadow); }
+.remedy h3, .remedy h4 { margin-top:.3rem; }
+.remedy-fields { display:grid; gap:.55rem; margin-top:.6rem; }
+.field { background:#fbf7ee; border-radius:10px; padding:.55rem .8rem .65rem; }
+.field h4 { margin:0 0 .2rem; font-size:.78rem; text-transform:uppercase; letter-spacing:.06em; color:var(--terracotta); }
+.field p { margin:.25rem 0; }
+.field-children { background:#f4efe4; }
+.field-safety-and-pairing { background:var(--terracotta-soft); }
+.source-line, .tradition p, .kids-note p { font-size:.95rem; }
+.source-line { color:var(--muted); margin-top:.8rem; }
+.badge-added { display:inline-block; background:var(--terracotta); color:#fffaf1; font-family:var(--sans); font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.12rem .45rem; border-radius:999px; vertical-align:middle; line-height:1.4; }
+.added-block { border:1px dashed var(--terracotta); background:#fff8f4; border-radius:16px; padding:.9rem 1.1rem 1.1rem; margin:1rem 0 1.3rem; }
+.tradition, .kids-note, .callout { background:#fff8f4; border:1px dashed var(--terracotta); border-radius:14px; padding:.85rem 1rem; margin:1rem 0; }
+.callout { background:var(--green-soft); border-color:var(--green); }
+.pantry-box, .label-card { background:var(--paper); border:1px solid var(--line); border-radius:16px; padding:1rem 1.1rem; box-shadow:var(--shadow); margin:1rem 0; }
+.pantry-head, .pantry-actions { display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap; }
+.pantry-group { margin:.9rem 0; }
+.pantry-group h4 { margin:0 0 .45rem; }
+.pantry-items { display:grid; grid-template-columns:1fr 1fr; gap:.35rem 1rem; }
+label.check { display:flex; gap:.45rem; align-items:flex-start; font-size:.95rem; }
+label.check input { margin-top:.35rem; }
+.pantry-actions { margin-top:.6rem; }
+button { font:inherit; background:var(--green); color:#fffaf1; border:0; border-radius:999px; padding:.4rem .9rem; cursor:pointer; }
+button.secondary { background:transparent; color:var(--green-dark); border:1px solid var(--green); }
+.label-card { max-width:28rem; font-family:var(--serif); }
+.label-card .kicker { text-transform:uppercase; letter-spacing:.1em; font-size:.72rem; font-family:var(--sans); color:var(--muted); margin:0 0 .2rem; }
+.label-card h3 { margin:0 0 .5rem; }
+footer.site { margin-top:3rem; color:var(--muted); font-size:.9rem; border-top:1px solid var(--line); padding-top:1rem; }
+@media (max-width:900px) {
+  .wrap { grid-template-columns:1fr; padding:.8rem .8rem 3rem; }
+  .toc { position:relative; top:0; max-height:none; padding:0; border:0; background:transparent; box-shadow:none; }
+  .toc-toggle { display:block; width:100%; text-align:left; background:var(--paper); color:var(--green-dark); border:1px solid var(--line); border-radius:12px; padding:.7rem .9rem; font-weight:650; box-shadow:var(--shadow); }
+  .toc-inner { display:none; margin-top:.5rem; background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:.8rem; }
+  .toc.open .toc-inner { display:block; }
+  .pantry-items { grid-template-columns:1fr; }
+  .hero { padding:1.4rem 1.1rem 1.2rem; }
+}
+@media print {
+  body { background:#fff; font-size:11pt; }
+  .wrap { display:block; max-width:none; padding:0; }
+  .toc, .no-print, .toc-toggle, .pantry-actions { display:none !important; }
+  .hero, .remedy, .added-block, .pantry-box, .label-card, .tradition, .kids-note, .callout { box-shadow:none; break-inside:avoid; }
+  h2 { break-before:page; border-top:0; }
+  h2#summary { break-before:avoid; }
+  .hero { break-before:avoid; }
+  a { color:inherit; text-decoration:none; }
+  a[href^="http"]::after { content:" (" attr(href) ")"; font-size:.85em; color:#444; }
+  th { background:#ddd !important; color:#000 !important; }
+}
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    
+    <nav class="toc" aria-label="Table of contents">
+      <button type="button" class="toc-toggle no-print" aria-expanded="false">Contents</button>
+      <div class="toc-inner">
+        <h2>Contents</h2>
+        <a href="#summary">1. Quick-reference summary</a><a href="#added-summary">Added remedies at a glance</a><a href="#where-to-start">2. Where to start</a><a href="#primer">3. Preparation primer</a><a href="#pediatric-dosing">Pediatric dosing</a><a href="#core-herbs">4. Core herb profiles</a><a href="#herbalist-voices">Additional herbalist voices</a><a href="#systems">5. Remedies by body system</a><a class="sub" href="#system-digestive">Digestive</a><a class="sub" href="#system-immune">Immune</a><a class="sub" href="#system-respiratory">Respiratory</a><a class="sub" href="#system-cardiovascular">Cardiovascular</a><a class="sub" href="#system-nervous">Nervous</a><a class="sub" href="#system-musculoskeletal">Musculoskeletal</a><a class="sub" href="#system-lymphatic">Lymphatic</a><a class="sub" href="#system-urinary">Urinary</a><a class="sub" href="#system-integumentary">Skin</a><a class="sub" href="#system-endocrine">Endocrine</a><a class="sub" href="#system-reproductive">Reproductive</a><a href="#pantry">6. Starter pantry</a><a href="#labeling">7. Labeling and red flags</a><a href="#sources">8. Sources</a><a href="#final">Final recommendation</a>
+      </div>
+    </nav>
+
+    <main class="content">
+      <header class="hero">
+        <p class="kicker">Krystle's Kitchen</p>
+        <h1>The Home Herbalist’s Practical Remedy Guide</h1>
+        <p class="lede">A beginner-friendly reference covering 11 body systems, 22 distinct remedies, six core herbs, and conservative adult and child use. This expanded page keeps every original remedy intact and marks later research additions so you can see what is new.</p>
+      </header>
+      
+<div class="callout added-block" id="added-note">
+  <p><span class="badge-added">Added</span> This expanded edition keeps the original 22 remedies and all original doses, safety notes, and tables unchanged. New material is marked with an <span class="badge-added">Added</span> label. Additions are drawn from checkable herbal-medicine sources (traditional texts, herbalist monographs, and published practitioner writing). No dose was invented where a source did not give one.</p>
+</div>
+
+      <div class="article-flow">
+        <p>A beginner-friendly reference covering 11 body systems, 22 distinct remedies, six core herbs, and conservative adult and child use.</p>
+<p>This guide brings together traditional herbal practice, herbal medicine-making methods, botanical safety references, and relevant clinical research.</p>
+<p><strong>Important distinction:</strong> These are home preparations for comfort, nutrition, and limited symptom support. They are not substitutes for medical treatment, and not every traditional herbal use has been demonstrated in human clinical trials.</p>
+<p>The remedies below are deliberately mild. Their exact household recipes and short trial periods are conservative adaptations of published preparation methods, not necessarily formulations tested in clinical studies.</p>
+<p>For evidence, I use these distinctions:</p>
+<ul><li><strong>[Verified]</strong> A finding or safety statement supported by a source I directly checked.</li><li><strong>[Traditional]</strong> A use described in herbal practice but not necessarily established by clinical research.</li><li><strong>[Inference]</strong> A cautious practical adaptation, such as choosing a smaller serving or shorter duration than a published adult herbal dose.</li></ul>
+<p>I reviewed the American Herbal Products Association's <em>Botanical Safety Handbook</em>, Michael Moore's <em>Herbal Materia Medica</em>, Jim McDonald's preparation guidance, Aviva Romm's pediatric herbal guidance, and additional relevant sources. I could not independently verify the full contents of every requested book, so I have not attributed specific doses to books I could not examine.</p>
+<h2 id="summary">1. Quick-reference summary</h2>
+<p>In this table, <strong>Y</strong> means a child-appropriate preparation or ordinary food portion is described for ages 2–12, with restrictions. <strong>N</strong> means the herbal preparation is not recommended for children because a sufficiently reliable pediatric dose or indication could not be established. Neither designation is a guarantee of safety.</p>
+<div class="table-wrap"><table><thead><tr><th>Body system</th><th>Two focus herbs</th><th>Unique remedies and forms</th><th>Ages 2–12</th></tr></thead><tbody><tr><td>Digestive</td><td>Ginger, fennel</td><td>Ginger settling decoction; fennel after-meal infusion</td><td>Y* / N</td></tr><tr><td>Immune</td><td>Garlic, elderflower</td><td>Garlic-lemon broth; elderflower comfort tea</td><td>Y / Y*</td></tr><tr><td>Respiratory</td><td>Thyme, marshmallow root</td><td>Thyme-honey throat tea; marshmallow cold infusion</td><td>N / N</td></tr><tr><td>Cardiovascular / circulatory</td><td>Rosemary, hibiscus</td><td>Rosemary chickpea bowl; ruby hibiscus tea</td><td>Y / N</td></tr><tr><td>Nervous</td><td>Lemon balm, chamomile</td><td>Lemon balm afternoon tea; chamomile bedtime tea</td><td>Y* / Y*</td></tr><tr><td>Musculoskeletal</td><td>Turmeric, rosemary</td><td>Turmeric golden milk; rosemary joint compress</td><td>N / N</td></tr><tr><td>Lymphatic</td><td>Cleavers, calendula</td><td>Cleavers cool infusion; calendula glandular-support tea</td><td>N / N</td></tr><tr><td>Urinary</td><td>Corn silk, goldenrod</td><td>Corn silk comfort infusion; goldenrod short-course tea</td><td>N / N</td></tr><tr><td>Integumentary / skin</td><td>Calendula, oats</td><td>Calendula skin salve; soothing oat bath</td><td>Y / Y</td></tr><tr><td>Endocrine / metabolic</td><td>Ceylon cinnamon, flaxseed</td><td>Ceylon cinnamon oat bowl; flaxseed yogurt bowl</td><td>Y / Y</td></tr><tr><td>Reproductive</td><td>Raspberry leaf, pumpkin seed</td><td>Raspberry leaf cycle tea (female considerations); pumpkin seed topping (male considerations)</td><td>N / Food only</td></tr></tbody></table></div>
+<p>*The children's tea serving sizes are conservative adaptations informed by Aviva Romm's guidance for the same gentle herbs. They are not individually validated pediatric doses for these exact recipes.</p>
+<p>All <strong>22 remedies are unique</strong>. An herb may appear in more than one body system, but the preparation itself is not repeated.</p><section class="added-block" id="added-summary">
+  <h3>Added remedies and notes at a glance <span class="badge-added">Added</span></h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Where it sits</th><th>What was added</th><th>Kind</th><th>Ages 2–12</th></tr></thead>
+    <tbody>
+      <tr><td>Immune</td><td><a href="#added-garlic-honey">Garlic-honey spoon</a>, plus a related thyme-garlic-onion honey</td><td>Suggested extra</td><td>Honey never under age 1; see the remedy</td></tr>
+      <tr><td>Respiratory</td><td><a href="#added-thyme-steam">Thyme herbal steam</a></td><td>Suggested extra</td><td>See the pediatric bathroom-steam method</td></tr>
+      <tr><td>Respiratory</td><td><a href="#added-garlic-lemonade">Garlic lemonade</a></td><td>Kid-friendly alternative</td><td>Y, with age limits from Romm</td></tr>
+      <tr><td>Musculoskeletal</td><td><a href="#added-ginger-compress">Warm ginger compress</a></td><td>Suggested extra</td><td>N — no published pediatric compress dose found</td></tr>
+      <tr><td>Lymphatic, urinary, reproductive</td><td>Explanatory notes only</td><td>Kids-column notes</td><td>Original N stands</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<h2 id="where-to-start">2. Where to start: your first five remedies</h2>
+<p>Start with one remedy at a time. This makes it easier to learn the preparation method and recognize any unwanted reaction.</p>
+<p><strong>1. Ginger settling decoction</strong></p>
+<p>A simple way to learn decoctions using fresh roots. Useful as a warm drink for occasional mild digestive discomfort.</p>
+<hr>
+<p><strong>2. Chamomile bedtime tea</strong></p>
+<p>Introduces covered infusions using a readily available flower. Traditionally used for relaxation and mild digestive tension.</p>
+<hr>
+<p><strong>3. Garlic-lemon broth</strong></p>
+<p>A practical introduction to food-based herbalism, without concentrated extracts or complicated equipment.</p>
+<hr>
+<p><strong>4. Soothing oat bath</strong></p>
+<p>A gentle topical preparation for dry, itchy, intact skin. No herbal extracts are swallowed.</p>
+<hr>
+<p><strong>5. Calendula skin salve</strong></p>
+<p>Teaches infused oils and salve-making in one project. A useful next step once you've practiced simple teas.</p>
+<p><strong>Suggested first-week sequence:</strong> Make the ginger or chamomile tea first, the broth on another day, and the oat bath when needed. Prepare the calendula salve as your first longer project. There is no benefit to taking all five simultaneously.</p>
+<p>For children, pregnancy, breastfeeding, chronic illness, or regular medication use, follow the individual restrictions below rather than assuming that a remedy is safe because its ingredients are familiar.</p>
+<h2 id="primer">3. Beginner herbal preparation primer</h2>
+<p>The basic techniques behind the recipes</p>
+<p>The most important skill is choosing the right preparation for the plant material. Soft leaves and flowers usually need gentle steeping. Dense roots and seeds often need more time or heat.</p>
+<p><strong>Infusion (herbal tea)</strong></p>
+<p>Pour 240 mL recently boiled water over approximately 1–2 g of dried leaves or flowers. Cover for 10–20 minutes, then strain. Keeping the lid on helps retain aromatic compounds.</p>
+<p><strong>Decoction</strong></p>
+<p>Place approximately 2–4 g of chopped fresh root or an herb-specific amount of dried root in 240 mL water. Simmer gently for 10–15 minutes. Strain. Strength varies considerably by herb.</p>
+<p><strong>Tincture</strong></p>
+<p>An alcohol-based extract. A common starting ratio for compatible dried herbs is <strong>1:5 weight to volume</strong>: 20 g dried herb with 100 mL suitable alcohol-water mixture, often 40–60% alcohol. Macerate 2–6 weeks, then strain. The required alcohol strength is herb-specific.</p>
+<p><strong>Glycerite</strong></p>
+<p>An alcohol-free herbal extract made with food-grade vegetable glycerin. An illustrative dried-herb formula uses 20 g dried herb, 60 mL glycerin, and 40 mL water. Macerate approximately 3–4 weeks and strain. Not every herb extracts well this way.</p>
+<p><strong>Oxymel</strong></p>
+<p>An extract using honey and vinegar, often in roughly equal volumes. For example, 120 mL honey and 120 mL vinegar can be used with a suitable dried herb, then strained after 2–4 weeks. Acidity, sugar content, and herb choice affect tolerability and storage.</p>
+<p><strong>Infused oil and salve</strong></p>
+<p>Infuse completely dried herbs in olive oil over gentle indirect heat, then strain. For a soft salve, combine roughly 100 mL infused oil with 8–12 g beeswax and melt together gently. Let cool in a clean tin.</p>
+<p>For syrups, a common household technique combines strained herbal tea and honey in roughly equal volumes. Refrigerate and make small batches.</p>
+<p><strong>Preparation safety</strong></p>
+<ul><li>Use a scale for herbs rather than relying on teaspoons when quantities matter. Spoon weights vary by grind and density.</li><li>Keep fresh herbal teas refrigerated and use within 24 hours as a conservative household rule.</li><li>Cold infusions should steep in the refrigerator, rather than sitting in warm conditions overnight.</li><li>Make infused oils only from fully dried herbs for these recipes. Introducing water into oil increases spoilage risks. Never store homemade raw-garlic-in-oil preparations at room temperature.</li><li>Homemade glycerites, oxymels, and syrups do not have automatically validated shelf lives. Without validated preservation, refrigerate small batches and discard anything with gas, mold, fermentation, or unusual odor.</li><li>Alcohol tincture doses cannot be transferred directly to glycerites. Extraction strength and absorption may differ.</li><li>Do not give homemade tinctures or glycerites to children based on a general age or weight formula alone.</li></ul>
+<p>These techniques are grounded chiefly in Jim McDonald's <em>Herbal Preparations</em>, James Green's <em>The Herbal Medicine-Maker's Handbook</em>, and Michael Moore's <em>Herbal Materia Medica</em>.</p>
+<h3 id="pediatric-dosing">Understanding pediatric dosing</h3>
+<p>Aviva Romm discusses gentle teas made from ginger, chamomile, lemon balm, and elderflowers for children and describes approximately ¼–1 cup as a broad serving range for toddlers and older children. That is not a universal dose for every herb or every tea concentration.</p>
+<p>For those four herbs, I have used the <strong>lower end</strong> of her range for age 2–6 and a modest serving for age 6–12, with weaker preparations where specified. These are conservative adaptations, not doses clinically validated for the exact recipe.</p>
+<p>I have not applied Clark's or Young's rule to the other botanicals. Dividing an adult dose by weight cannot establish that a particular herb is safe for a child.</p>
+<p><strong>Children under 2:</strong> None of the medicinal remedies in this guide is recommended for unsupervised use at this age. Honey is specifically unsafe under 12 months because of infant botulism. Children with illness should receive age-appropriate fluids, foods, and pediatric care as needed.</p>
+<hr>
+<h2 id="core-herbs">4. The six core-herb profiles</h2>
+<h3 id="herb-garlic">Garlic (Allium sativum)</h3>
+<p><strong>Part used:</strong> Bulb or cloves.</p>
+<p><strong>Traditional energetics:</strong> Strongly warming and drying.</p>
+<p><strong>Main actions:</strong> Pungent digestive stimulant, culinary antimicrobial activity, and traditional respiratory and circulatory support. Laboratory antimicrobial effects do not establish that eating garlic treats an infection in a person.</p>
+<p><strong>Best forms:</strong> Crushed fresh garlic, cooked garlic, broth, and food. Concentrated extracts behave differently.</p>
+<p><strong>Preparation tip:</strong> Crush or chop garlic and allow it to rest approximately 10 minutes before cooking. This allows alliinase to produce allicin before heat inactivates the enzyme.</p>
+<p><strong>Conservative food portions:</strong> Adults, ¼–1 clove (approximately 0.75–3 g); ages 2–6, about ⅛ clove (0.4 g) cooked in food; ages 6–12, about ¼ clove (0.75 g) in food. These are illustrative portions, not established medical daily doses.</p>
+<p><strong>Safety:</strong> [Verified] The AHPA handbook identifies clinically relevant interaction concerns for higher garlic intakes, including bleeding-related precautions, an interaction with saquinavir, irritation from raw garlic, reflux aggravation, and possible chemical burns when raw garlic is placed on skin. Discuss medicinal use before surgery; the handbook advises a seven-day preoperative stop for garlic use of concern. Pregnancy and breastfeeding are different considerations at food amounts than at supplemental doses.</p>
+<p><strong>Pairs with:</strong> Lemon, thyme, cooked vegetables, olive oil.</p>
+<p><strong>Avoid combining medicinal-strength preparations with:</strong> Anticoagulants, antiplatelet medicines, or other agents affecting bleeding without professional review. Avoid raw-garlic poultices.</p>
+
+<div class="tradition added-block" id="trad-garlic">
+  <h4>From the tradition <span class="badge-added">Added</span></h4>
+  <p>Rosalee de la Forêt describes garlic as warming and drying, and says herbalists commonly use it for symptoms of upper respiratory infections, as a general antimicrobial, and to support heart health and digestion. She lists food, oil, vinegar, and honey among ordinary preparations. Source: Rosalee de la Forêt, “Garlic Uses and Plant Profile,” LearningHerbs, 14 July 2021, <a href="https://www.learningherbs.com/blog/garlic-uses">learningherbs.com/blog/garlic-uses</a>.</p>
+  <p>Felter and Lloyd, in <cite>King’s American Dispensatory</cite> (1898), call garlic stimulant, diuretic, expectorant, and rubefacient, and record its traditional use in coughs and catarrhal affections. They give a historical adult dose of 1 or 2 drachms of fresh garlic, or a small teaspoonful of the juice, and warn that large doses can cause nausea, vomiting, and purging. A traditional syrup of garlic is described separately for cough and chronic catarrhal affections. Source: <a href="https://www.henriettes-herb.com/eclectic/kings/allium-sati.html">henriettes-herb.com/eclectic/kings/allium-sati.html</a> and the syrup monograph at <a href="https://www.henriettes-herb.com/eclectic/kings/allium-sati_syru.html">allium-sati_syru.html</a>.</p>
+  <p>Paul Bergner’s practitioner interviews in <cite>The Healing Power of Garlic</cite>, excerpted in <cite>Medical Herbalism</cite>, record Mary Bove’s clinical use of a garlic syrup in most of her respiratory formulas, with glycerites rather than alcohol tinctures for children, and her observation that “Garlic is really great for the lungs, especially combined with warming aromatic herbs like thyme and hyssop.” That interview does not publish her exact syrup recipe or a child’s measured dose, so none is attributed here. Source: Paul Bergner, “Allium sativum: Practitioner interviews,” <a href="http://medherb.com/Materia_Medica/Allium_sativum_-_Practitioner_interviews.htm">medherb.com</a>.</p>
+  <p>Susun Weed’s everyday flu-prevention list simply says: “Eat garlic. (Even powdered, even cooked.) Eat ginger. (Or drink it.)” Source: Susun S. Weed, “Ten Top Tips for Avoiding the Flu,” <cite>Wise Woman Herbal Ezine</cite>, March 2006, <a href="http://www.susunweed.com/herbal_ezine/March06/wisewoman.htm">susunweed.com</a>.</p>
+</div>
+
+<h3 id="herb-ginger">Ginger (Zingiber officinale)</h3>
+<p><strong>Part used:</strong> Rhizome.</p>
+<p><strong>Energetics:</strong> Warming, stimulating, somewhat drying.</p>
+<p><strong>Main actions:</strong> Traditionally carminative, meaning it helps with gas and digestive discomfort. It has also been studied for nausea, though effects depend on the condition and preparation.</p>
+<p><strong>Best forms:</strong> Fresh-root decoction, food, or a ginger-containing tea.</p>
+<p><strong>Preparation tip:</strong> Slice thinly or grate before simmering. Cover the pot to retain aroma.</p>
+<p><strong>Conservative food portions:</strong> Adults, approximately 1–4 g fresh root; ages 2–6, 0.25–0.5 g in food or a weak tea; ages 6–12, approximately 0.5–1 g in food or weak tea. Pediatric tea use is based on Romm's general guidance, not an established safe daily gram limit.</p>
+<p><strong>Safety:</strong> [Verified] The AHPA handbook advises professional supervision with active gallstone disease. Ginger may cause heartburn, particularly in larger amounts. A human study found increased antiplatelet activity when ginger was combined with nifedipine. Pregnancy studies of specific ginger preparations exist, but pregnant readers should use condition-specific guidance rather than assuming every ginger extract is equivalent.</p>
+<p><strong>Pairs with:</strong> Lemon, honey when age-appropriate, mild broths.</p>
+<p><strong>Avoid:</strong> Concentrated ginger products with anticoagulants or cardiovascular medications without an interaction review; excessive amounts if reflux worsens.</p>
+
+<div class="tradition added-block" id="trad-ginger">
+  <h4>From the tradition <span class="badge-added">Added</span></h4>
+  <p>Rosalee de la Forêt calls fresh ginger warming and drying, and dried ginger hot and drying. She notes that it is aromatic and dispersing, and that herbalists use it for colds and flu, nausea, inflammatory pain such as arthritis, and menstrual cramps due to stagnation. Her published dosage suggestions are: fresh root 1–15 grams; dried root 3–12 grams; and, citing David Winston and Merrily Kuhn, a fresh tincture at 1:2 in 60% alcohol, 1–2 mL in water three times a day. She cautions that large amounts should not be used during pregnancy, and that people on blood-thinning medication should consult a clinician before taking large amounts regularly. Source: Rosalee de la Forêt, “Ginger Uses and Plant Profile,” LearningHerbs, 14 June 2021, <a href="https://www.learningherbs.com/blog/ginger-uses">learningherbs.com/blog/ginger-uses</a>, citing Kuhn and Winston, <cite>Herbal Therapy &amp; Supplements</cite>.</p>
+  <p>Aviva Romm gives a household ginger tea: steep 1 tablespoon of fresh grated ginger in 1 cup of boiling water for ten minutes, cover while steeping, then add lemon and honey to taste. She says to drink it hot, up to 4 cups daily, and that it is “safe during pregnancy up to 2 cups daily, and while breastfeeding.” She also describes ginger as helpful for aches, pains, digestive symptoms, and congestion that come with fever, colds, and flu. Source: Aviva Romm, “8 Safe and Effective Herbal Antibiotic Alternatives,” <a href="https://avivaromm.com/herbal-antibiotic-alternatives/">avivaromm.com/herbal-antibiotic-alternatives</a>.</p>
+  <p>The Herbal Academy lists ginger among circulatory stimulants and antispasmodics used in warm compresses and fomentations for muscle discomfort. Source: Angela Justis, “Herbal Compresses and Fomentations,” Herbal Academy, 30 January 2018, <a href="https://theherbalacademy.com/blog/herbal-compresses-and-fomentations/">theherbalacademy.com</a>, also citing Rosemary Gladstar, <cite>Rosemary Gladstar’s Medicinal Herbs: A Beginner’s Guide</cite> (2012), on rotating hot and cold compresses as a fomentation.</p>
+</div>
+
+<h3 id="herb-turmeric">Turmeric (Curcuma longa)</h3>
+<p><strong>Part used:</strong> Rhizome.</p>
+<p><strong>Energetics:</strong> Warming and drying in many Western herbal traditions.</p>
+<p><strong>Main actions:</strong> Traditional digestive and joint-support herb. Curcuminoids have anti-inflammatory activity in laboratory research, but culinary turmeric cannot be assumed equivalent to concentrated clinical extracts.</p>
+<p><strong>Best forms:</strong> Culinary powder, fresh rhizome, warm milk, soups, and curries.</p>
+<p><strong>Preparation tip:</strong> Use turmeric with a little dietary fat. Black pepper can increase curcumin exposure, but concentrated piperine supplements are not appropriate to add casually to medicines.</p>
+<p><strong>Conservative food portions:</strong> Adults, approximately 0.5–1 g powder; ages 2–6, a culinary pinch around 0.1 g; ages 6–12, approximately 0.2–0.3 g in food. No medicinal pediatric daily dose is established here.</p>
+<p><strong>Safety:</strong> [Verified] The 2013 AHPA handbook classifies the whole herb as relatively low concern in its reviewed uses, but later reports identify rare liver injuries associated with some concentrated turmeric/curcuminoid products. The 2026 <em>HerbalGram</em> review notes that the causal evidence is not conclusive in every case and that normal food use is distinct from supplements.</p>
+<p>Avoid medicinal turmeric if you have gallbladder obstruction, biliary disease, or liver disease unless your clinician approves. Review blood thinners and other medications before using concentrated extracts. Do not treat culinary turmeric as equivalent to high-bioavailability curcumin capsules.</p>
+<p><strong>Pairs with:</strong> Milk or another fat-containing food, ginger in cooking.</p>
+<p><strong>Avoid:</strong> High-dose curcumin-piperine combinations without professional guidance.</p>
+
+<div class="tradition added-block" id="trad-turmeric">
+  <h4>From the tradition <span class="badge-added">Added</span></h4>
+  <p>Rosalee de la Forêt also profiles turmeric as a pungent kitchen herb in <cite>Alchemy of Herbs</cite> (2017). The original guide already covers conservative culinary use, the Botanical Safety Handbook, and later turmeric-safety reporting; no additional internal dose is added here.</p>
+</div>
+
+<h3 id="herb-cinnamon">Ceylon cinnamon (Cinnamomum verum)</h3>
+<p><strong>Part used:</strong> Inner bark.</p>
+<p><strong>Energetics:</strong> Warming and drying.</p>
+<p><strong>Main actions:</strong> Aromatic digestive spice and traditional warming circulatory herb. Its use in metabolic health is being researched, but cinnamon is not a substitute for diabetes medication.</p>
+<p><strong>Best forms:</strong> Lightly powdered spice, cooking, or modest bark infusions.</p>
+<p><strong>Preparation tip:</strong> Choose products labeled <em>Cinnamomum verum</em> or <em>Cinnamomum zeylanicum</em>.</p>
+<p><strong>Conservative food portions:</strong> Adults, 0.3–0.5 g daily when used in food; ages 2–6, approximately 0.1 g; ages 6–12, approximately 0.2 g. These are practical culinary portions, not proven therapeutic doses.</p>
+<p><strong>Ceylon versus cassia:</strong> [Verified] Cassia cinnamon can contain substantially more coumarin, a substance that raises liver safety concerns at sufficiently high repeated exposure. True Ceylon cinnamon is generally the better choice for frequent use. Thin, numerous papery layers in a quill suggest Ceylon; thick single-layer sticks suggest cassia. Powdered cinnamon cannot reliably be identified by appearance alone.</p>
+<p><strong>Safety:</strong> AHPA lists higher therapeutic amounts of Ceylon cinnamon as inappropriate in pregnancy without practitioner supervision; it distinguishes these from ordinary cooking use. Cinnamon may irritate the mouth or skin. Anyone using blood-glucose-lowering medicines should discuss medicinal cinnamon and monitor glucose.</p>
+<p><strong>Pairs with:</strong> Oats, apples, ginger, milk.</p>
+<p><strong>Avoid:</strong> Large daily cassia doses, cinnamon essential oil internally, and concentrated cinnamon therapy alongside diabetes medication without review.</p>
+
+<div class="tradition added-block" id="trad-cinnamon">
+  <h4>From the tradition <span class="badge-added">Added</span></h4>
+  <p>Rosalee de la Forêt includes cinnamon among the pungent, warming kitchen spices in <cite>Alchemy of Herbs</cite> (Hay House, 2017), grouping it with garlic, ginger, rosemary, and thyme. Source: LearningHerbs book page, <a href="https://www.learningherbs.com/alchemy-of-herbs">learningherbs.com/alchemy-of-herbs</a>.</p>
+  <p>Felter and Lloyd record official aromatic powder made with equal parts Ceylon cinnamon and ginger (with cardamom and nutmeg), traditionally used for flatulent colic, nausea, and diarrhea, at a historical dose of 5 to 20 grains. That is a historical Eclectic dose, not a modern household serving, and is noted here for tradition only. Source: <cite>King’s American Dispensatory</cite>, <a href="https://www.henriettes-herb.com/eclectic/kings/cinnamomum_pulv.html">henriettes-herb.com/eclectic/kings/cinnamomum_pulv.html</a>.</p>
+</div>
+
+<h3 id="herb-rosemary">Rosemary (Salvia rosmarinus)</h3>
+<p><strong>Part used:</strong> Leaves and tender flowering tops.</p>
+<p><strong>Energetics:</strong> Warming, drying, aromatic.</p>
+<p><strong>Main actions:</strong> Traditional digestive and circulatory support, culinary antioxidant source, and aromatic ingredient for topical preparations.</p>
+<p><strong>Best forms:</strong> Cooking, covered infusion, and properly prepared topical compress.</p>
+<p><strong>Preparation tip:</strong> Crush the leaves lightly before steeping. Use covered infusions to retain aroma.</p>
+<p><strong>Conservative food portions:</strong> Adults, about 0.25–0.5 g dried leaves; ages 2–6, a small pinch around 0.1 g; ages 6–12, approximately 0.2 g. These refer to food seasoning, not medicinal tea doses.</p>
+<p><strong>Safety:</strong> [Verified] AHPA distinguishes culinary use from medicinal use and lists rosemary as Safety Class 1 in its handbook, with cautions concerning traditional emmenagogue claims and some theoretical glucose and iron-related effects. Evidence does not establish these theoretical effects as clinically significant at normal food amounts.</p>
+<p>Avoid medicinal rosemary during pregnancy or breastfeeding without professional assessment. Test topical preparations on a small area first. Concentrated rosemary essential oil is not interchangeable with the leaf.</p>
+<p><strong>Pairs with:</strong> Olive oil, garlic, legumes, roasted vegetables.</p>
+<p><strong>Avoid:</strong> Undiluted essential oil on the skin and ingestion of essential oil.</p>
+
+<div class="tradition added-block" id="trad-rosemary">
+  <h4>From the tradition <span class="badge-added">Added</span></h4>
+  <p>David Hoffmann describes rosemary as “a circulatory and nervine stimulant,” used where psychological tension is present, and says that externally it may be used to ease muscular pain, sciatica, and neuralgia. His infusion directions are: pour a cup of boiling water onto 1–2 teaspoonfuls of the dried herb, cover, infuse 10–15 minutes, and drink three times a day; tincture, 1–2 mL three times a day. Source: David L. Hoffmann, “Rosemary,” <a href="https://healthy.net/2000/12/06/rosemary-3/">healthy.net/2000/12/06/rosemary-3</a>.</p>
+  <p>Rosalee de la Forêt gives rosemary’s energetics as warming and drying, and its properties as aromatic, carminative, circulatory stimulant, hepatic, antimicrobial, and stimulating. Source: “Rosemary Uses and Plant Profile,” LearningHerbs, <a href="https://www.learningherbs.com/blog/rosemary-uses">learningherbs.com/blog/rosemary-uses</a>.</p>
+  <p>Susun Weed includes thyme and rosemary among “hot herbal antibacterial teas” in her everyday flu-prevention advice, alongside eating garlic and ginger. Source: “Ten Top Tips for Avoiding the Flu,” March 2006, <a href="http://www.susunweed.com/herbal_ezine/March06/wisewoman.htm">susunweed.com</a>.</p>
+</div>
+
+<h3 id="herb-thyme">Thyme (Thymus vulgaris)</h3>
+<p><strong>Part used:</strong> Leaves and flowering aerial parts.</p>
+<p><strong>Energetics:</strong> Warming, drying, aromatic.</p>
+<p><strong>Main actions:</strong> Traditional respiratory and digestive support. Aromatic constituents such as thymol have laboratory antimicrobial activity, but thyme tea is not a treatment for pneumonia or bacterial throat infection.</p>
+<p><strong>Best forms:</strong> Covered tea, soup, culinary seasoning.</p>
+<p><strong>Preparation tip:</strong> Steep covered rather than boiling the leaves vigorously.</p>
+<p><strong>Conservative food portions:</strong> Adults, approximately 0.25–0.5 g dried herb in cooking; ages 2–6, around 0.1 g; ages 6–12, around 0.2 g. These are culinary amounts only.</p>
+<p><strong>Safety:</strong> [Verified] The AHPA handbook classifies medicinal thyme use as Safety Class 2b and advises against medicinal use in pregnancy unless supervised. It notes that these cautions do not generally apply to normal food seasoning amounts. Allergic reactions, including sensitivity shared with rosemary or oregano, have been reported. Breastfeeding safety at medicinal doses is insufficiently established.</p>
+<p><strong>Pairs with:</strong> Honey for an age-appropriate throat drink, garlic, lemon, broth.</p>
+<p><strong>Avoid:</strong> Thyme essential oil internally and high-strength thyme preparations in pregnancy or young children.</p>
+<hr>
+
+<div class="tradition added-block" id="trad-thyme">
+  <h4>From the tradition <span class="badge-added">Added</span></h4>
+  <p>David Hoffmann lists thyme’s actions as carminative, antimicrobial, antispasmodic, expectorant, astringent, and anthelmintic, and describes it as “an excellent cough remedy, producing expectoration and reducing unnecessary spasm.” His infusion directions are: pour a cup of boiling water onto 2 teaspoonfuls of the dried herb, infuse 10 minutes, and drink three times a day; tincture, 2–4 mL three times a day. Source: David L. Hoffmann, “Thyme,” <a href="https://healthy.net/2019/08/26/thyme-2/">healthy.net/2019/08/26/thyme-2</a>.</p>
+  <p>Felter and Lloyd likewise call thyme tonic, carminative, emmenagogue, and antispasmodic, and give the dose of the infusion as 1 to 3 fluid ounces. They note that the leaves have occasionally been used externally as a fomentation. Source: <cite>King’s American Dispensatory</cite> (1898), <a href="https://www.henriettes-herb.com/eclectic/kings/thymus.html">henriettes-herb.com/eclectic/kings/thymus.html</a>.</p>
+  <p>Rosalee de la Forêt describes thyme as hot and dry, and lists infused honey, steam inhalation, culinary use, and cough syrup among its preparations. She notes traditional use for symptoms of colds and flu, including sore throats and coughs, and for digestive spasms. Source: “Thyme Uses and Plant Profile,” LearningHerbs, 14 May 2016, <a href="https://www.learningherbs.com/blog/thyme-uses">learningherbs.com/blog/thyme-uses</a>. Kerry Bone and Simon Mills, <cite>Principles and Practice of Phytotherapy</cite> (2nd ed., 2013), are cited by the Herbal Academy for thyme’s use in formulas for acute bronchitis. Source: Herbal Academy, “DIY Thyme Honey Recipe,” 29 September 2025, <a href="https://theherbalacademy.com/blog/diy-thyme-honey-recipe/">theherbalacademy.com</a>.</p>
+  <p>Maud Grieve, writing on wild thyme, records the traditional claim that “Wild thyme tea, drunk by itself or mixed with other plants such as rosemary, etc., is an excellent remedy for headache and other nervous affections.” She did not give a measured modern dose in that remark. Source: Mrs. M. Grieve, <cite>A Modern Herbal</cite> (1931), at <a href="https://botanical.com/botanical/mgmh/mgmh.html">botanical.com</a>.</p>
+</div>
+
+
+<section class="added-block" id="herbalist-voices">
+  <h2>Additional herbalist voices <span class="badge-added">Added</span></h2>
+  <p>The original report relied mainly on the Botanical Safety Handbook, Michael Moore, Jim McDonald, Aviva Romm, James Green, and selected journal papers. The sources below were checked for this expansion. Only claims that could be tied to a specific, readable page or excerpt are used in the added remedies and profile notes. Where a requested book could not be examined directly, no dose is attributed to it.</p>
+  <ul>
+    <li><strong>Aviva Romm.</strong> Pediatric and household guidance for garlic lemonade, garlic-and-honey, ginger tea, thyme steams, and a children’s home medicine chest that includes marshmallow root, ginger, garlic, honey (over age 1), and thyme essential oil for vapor steams. <a href="https://avivaromm.com/herbal-antibiotic-alternatives/">Herbal antibiotic alternatives</a>; <a href="https://avivaromm.com/preventing-kids-ear-infections/">Preventing kids’ ear infections</a>; <a href="https://avivaromm.com/natural-medicine-chest-kids-immunity/">Herbs for kids</a>.</li>
+    <li><strong>Mary Bove, via Paul Bergner.</strong> Clinical remarks on garlic syrup in children’s respiratory formulas, garlic with thyme and hyssop for the lungs, and her own adult use of ginger-and-garlic poultices during pneumonia. No measured child dose appears in that interview. <a href="http://medherb.com/Materia_Medica/Allium_sativum_-_Practitioner_interviews.htm">Medical Herbalism practitioner interviews</a>.</li>
+    <li><strong>Rosemary Gladstar.</strong> Cited by the Herbal Academy for the distinction that a fomentation is made by rotating hot and cold compresses (<cite>Rosemary Gladstar’s Medicinal Herbs: A Beginner’s Guide</cite>, 2012). Her book was not independently page-checked for this expansion, so no unique Gladstar dose is given.</li>
+    <li><strong>David Hoffmann.</strong> Thyme and rosemary monographs, including actions and his stated adult infusion and tincture amounts, at <a href="https://healthy.net/2019/08/26/thyme-2/">healthy.net (thyme)</a> and <a href="https://healthy.net/2000/12/06/rosemary-3/">healthy.net (rosemary)</a>.</li>
+    <li><strong>Rosalee de la Forêt.</strong> Public plant profiles for garlic, ginger, thyme, and rosemary, plus <cite>Alchemy of Herbs</cite>. See LearningHerbs links in the core-herb notes.</li>
+    <li><strong>David Winston, with Merrily Kuhn.</strong> Fresh ginger tincture ratio and dose as cited by de la Forêt from <cite>Herbal Therapy &amp; Supplements</cite>.</li>
+    <li><strong>Kerry Bone and Simon Mills.</strong> <cite>Principles and Practice of Phytotherapy</cite> (2013), cited by the Herbal Academy for thyme in acute-bronchitis formulas. The book itself was not page-checked here.</li>
+    <li><strong>Felter and Lloyd.</strong> <cite>King’s American Dispensatory</cite> (1898), via Henriette’s Herbal Homepage, for garlic, garlic syrup, thyme, ginger-related aromatics, and cinnamon.</li>
+    <li><strong>Maud Grieve.</strong> <cite>A Modern Herbal</cite> (1931), via <a href="https://botanical.com/botanical/mgmh/mgmh.html">botanical.com</a>, including garlic and the wild-thyme-and-rosemary tea remark.</li>
+    <li><strong>Susun Weed.</strong> Everyday food-and-tea advice for garlic, ginger, thyme, and rosemary in “Ten Top Tips for Avoiding the Flu,” 2006.</li>
+    <li><strong>Paul Bergner.</strong> <cite>The Healing Power of Garlic</cite> interviews, as above, and the journal <cite>Medical Herbalism</cite>.</li>
+    <li><strong>The Herbal Academy.</strong> Thyme-garlic-onion honey; herbal steams, including a child-safety note to omit essential oils and not place a child’s face over a bowl; compress and fomentation method, including ginger.</li>
+    <li><strong>Chestnut School of Herbal Medicine.</strong> General children’s herbalism and immune-stimulant context (Juliet Blankespoor and colleagues). No unique measured pediatric dose from those pages was added as a recipe. <a href="https://chestnutherbs.com/herbs-for-kids/">Herbs for Kids</a>; <a href="https://chestnutherbs.com/the-best-herbal-immune-stimulants-for-cold-and-flu-season/">immune stimulants</a>.</li>
+    <li><strong>American Herbalists Guild.</strong> For individualized care beyond a home guide, a registered herbalist can be found through <a href="https://www.americanherbalistsguild.com/">americanherbalistsguild.com</a>.</li>
+    <li><strong>On the research list, but not used for new doses:</strong> Matthew Wood’s <cite>The Earthwise Herbal</cite>, Juliette de Baïracli Levy’s <cite>Common Herbs for Natural Health</cite>, Thomas Easley and Steven Horne’s <cite>The Modern Herbal Dispensatory</cite>, and Richo Cech’s <cite>Making Plant Medicine</cite>. Public, checkable excerpts with a specific household recipe for these added sections were not found, so no amounts are attributed to them here.</li>
+  </ul>
+</section>
+
+<h2 id="systems">5. Herbal remedies by body system</h2>
+<p>Every formula below states a single-batch preparation. Unless noted, use clean drinking water, clean utensils, and accurately identified food-grade or herb-grade plant material.</p>
+<h3 id="system-digestive" class="system-title">5.1 Digestive system</h3>
+<p><strong>Focus herb 1: Ginger.</strong> [Traditional, with some modern clinical support] Ginger is a useful first-choice kitchen herb for occasional nausea, mild gas, and unsettled digestion. It is easy to prepare at low strength.</p>
+<p><strong>Focus herb 2: Fennel.</strong> [Traditional] The aromatic fruits, commonly called seeds, have a long history of use after meals for gas and bloating. I have kept medicinal fennel out of the pediatric recipes because of uncertainty about its hormonal activity and long-term safety in young children.</p>
+<article class="remedy" id="remedy-1">
+<h4 class="remedy-title">Remedy 1. Ginger settling decoction</h4>
+<div class="remedy-fields"><div class="field field-form"><h4>Form</h4><div><p>Warm decoction.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-ingredients"><h4>Ingredients</h4><div><p>3 g fresh thinly sliced ginger and 240 mL water.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-preparation"><h4>Preparation</h4><div><p>Place ginger and water in a covered saucepan. Bring to a gentle simmer for 10 minutes, remove from heat, rest 3 minutes, then strain.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-use-and-duration"><h4>Use and duration</h4><div><p>Adults may drink 60–120 mL slowly once or twice daily for up to 2 days for occasional mild discomfort. Stop when symptoms resolve; if discomfort persists, seek assessment rather than continuing.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-children"><h4>Children</h4><div><p>Ages 2–6, use a weaker batch made with 1 g fresh ginger in 240 mL water and offer up to 60 mL once daily. Ages 6–12, up to 120 mL of that weaker batch once daily. These are cautious adaptations of Romm's ginger-tea guidance, not validated pediatric doses. Under 2: not recommended without pediatric direction.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-storage"><h4>Storage</h4><div><p>Refrigerate promptly, use within 24 hours.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-safety-and-pairing"><h4>Safety and pairing</h4><div><p>Can pair with plain toast or broth. Avoid if ginger worsens reflux. Seek professional advice with active gallstones, nifedipine, anticoagulants, or bleeding disorders. Possible side effects include heartburn and mouth irritation.<br>Preparation and adult dose context: Michael Moore, <em>Herbal Materia Medica</em>, ginger decoction. Pediatric context: Aviva Romm, <em>Who's Afraid of Fever?</em>. Safety: Gardner and McGuffin, <em>Botanical Safety Handbook</em>.</p></div></div></div>
+</article>
+<article class="remedy" id="remedy-2">
+<h4 class="remedy-title">Remedy 2. Fennel after-meal infusion</h4>
+<div class="remedy-fields"><div class="field field-form"><h4>Form</h4><div><p>Seed infusion.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-ingredients"><h4>Ingredients</h4><div><p>1.5 g lightly crushed dried fennel seeds and 240 mL water.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-preparation"><h4>Preparation</h4><div><p>Lightly crush the seeds. Cover with freshly boiled water, steep 15 minutes, and strain.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-use-and-duration"><h4>Use and duration</h4><div><p>Adults, 60–120 mL after a meal, up to twice daily for 1–2 days. Stop if discomfort worsens or continues.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-children"><h4>Children</h4><div><p>Ages 2–6 and 6–12: <strong>not recommended as a medicinal tea</strong>. Under 2: not recommended. Ordinary small seasoning amounts in age-appropriate food are a separate matter.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-storage"><h4>Storage</h4><div><p>Refrigerate, discard after 24 hours.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-safety-and-pairing"><h4>Safety and pairing</h4><div><p>Pairs with light meals. Avoid with known fennel, celery, or related pollen-spice allergies. Use caution with hormonal conditions, pregnancy, breastfeeding, and medicines with important absorption requirements. Fennel may cause allergic symptoms or stomach upset. Its safety profile includes a small case series involving premature breast development in children given large amounts of fennel tea for many months; this does not establish causation for ordinary seasoning.<br>Dose context: Michael Moore, <em>Herbal Materia Medica</em>, fennel infusion. Safety: Gardner and McGuffin, <em>Botanical Safety Handbook</em>.</p></div></div></div>
+</article>
+<h3 id="system-immune" class="system-title">5.2 Immune system</h3>
+<p><strong>Focus herb 1: Garlic.</strong> [Traditional] Garlic is a useful culinary herb during ordinary meals, including when appetite is reduced by a mild respiratory illness. Eating garlic has not been proven to cure infections.</p>
+<p><strong>Focus herb 2: Elderflower.</strong> [Traditional] Elderflowers have a history of use in warm teas during common colds and feverish illnesses. Comfort and hydration are the realistic goals here, not guaranteed immune stimulation.</p>
+<article class="remedy" id="remedy-3">
+<h4 class="remedy-title">Remedy 3. Garlic-lemon comfort broth</h4>
+<div class="remedy-fields"><div class="field field-form"><h4>Form</h4><div><p>Culinary broth.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-ingredients"><h4>Ingredients</h4><div><p>1 fresh garlic clove (approximately 3 g), 500 mL low-sodium vegetable broth, and 10 mL fresh lemon juice.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-preparation"><h4>Preparation</h4><div><p>Heat the broth until hot, then remove from heat. Crush the garlic and let stand 10 minutes. Stir garlic and lemon juice into the broth once it has cooled to a comfortably warm temperature. Divide into four approximately 125 mL servings.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-use-and-duration"><h4>Use and duration</h4><div><p>Adults, 125 mL once daily as food for up to 3 days, or whenever an ordinary broth is appealing. One serving contains about 0.75 g garlic.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-children"><h4>Children</h4><div><p>Ages 2–6, approximately 60 mL, containing about 0.36 g garlic. Ages 6–12, 125 mL. These are ordinary food portions, not medical garlic doses. Under 2, use plain age-appropriate broth instead of this medicinally framed recipe.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-storage"><h4>Storage</h4><div><p>Refrigerate leftovers immediately and use within 24 hours.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-safety-and-pairing"><h4>Safety and pairing</h4><div><p>Pairs with soft vegetables and rice. Avoid garlic if allergic or if it causes reflux. Medicinal garlic and higher intakes raise concerns with blood thinners, bleeding disorders, and surgery. Lemon may also worsen reflux. Garlic commonly causes breath odor or stomach irritation.<br>Food-dose distinction and cautions: Gardner and McGuffin, <em>Botanical Safety Handbook</em>, garlic monograph. Preparation principle: Jim McDonald, <em>Herbal Preparations</em>.</p></div></div></div>
+</article>
+<article class="remedy" id="remedy-4">
+<h4 class="remedy-title">Remedy 4. Elderflower comfort tea</h4>
+<div class="remedy-fields"><div class="field field-form"><h4>Form</h4><div><p>Flower infusion.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-ingredients"><h4>Ingredients</h4><div><p>2 g dried <em>Sambucus nigra</em> flowers and 240 mL water.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-preparation"><h4>Preparation</h4><div><p>Pour hot water over dried flowers, cover for 15 minutes, and strain thoroughly.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-use-and-duration"><h4>Use and duration</h4><div><p>Adults, 60–120 mL once or twice daily for up to 3 days during an uncomplicated cold.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-children"><h4>Children</h4><div><p>Ages 2–6, prepare a weaker batch with 1 g dried flowers per 240 mL and offer 60 mL once daily. Ages 6–12, up to 120 mL of the weaker tea once daily. Pediatric guidance is adapted from Aviva Romm. Under 2: not recommended without pediatric direction.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-storage"><h4>Storage</h4><div><p>Refrigerate up to 24 hours.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-safety-and-pairing"><h4>Safety and pairing</h4><div><p>Pairs with rest, water, and age-appropriate honey if desired. Use correctly identified <strong>elderflowers</strong>, not leaves, stems, or unripe berries. Avoid with plant allergy. Pregnancy and breastfeeding safety for medicinal amounts remains insufficiently established. May cause an allergic reaction or digestive discomfort. Do not use it to delay evaluation of a significant fever or worsening respiratory illness.<br>Adult infusion context: Michael Moore, <em>Herbal Materia Medica</em>. Pediatric botanical context: Aviva Romm, <em>Who's Afraid of Fever?</em>. Safety: Gardner and McGuffin, <em>Botanical Safety Handbook</em>, <em>Sambucus</em> flower monograph.</p></div></div></div>
+</article>
+
+<article class="remedy added-block" id="added-garlic-honey">
+  <h4>Suggested extra focus herb: Garlic-honey spoon <span class="badge-added">Added</span></h4>
+  <p>This is a separate preparation from Remedy 3, the garlic-lemon comfort broth. It follows Aviva Romm’s published kitchen method and sits in a long tradition of garlic syrups for coughs recorded by Felter and Lloyd.</p>
+  <div class="remedy-fields">
+    <div class="field"><h4>Form</h4><div><p>Culinary honey mixture, taken from a spoon.</p></div></div>
+    <div class="field"><h4>Ingredients</h4><div><p>1 fresh garlic clove, pressed or crushed, and 1 teaspoon honey.</p></div></div>
+    <div class="field"><h4>Preparation</h4><div><p>Press or crush the clove, mix it with a teaspoon of honey, and take it from the spoon. Crushing and briefly resting garlic before mixing is consistent with the alliinase note in the core garlic profile; Romm’s published method is simply to press the clove and mix it with the honey.</p></div></div>
+    <div class="field"><h4>Use and duration</h4><div><p>Romm’s directions: repeat 1–2 times each day during a cold. This is short-term comfort support during an ordinary cold, not a substitute for evaluation of a serious infection.</p></div></div>
+    <div class="field"><h4>Children</h4><div><p>Honey must never be given to children under 12 months because of infant botulism, a point also made in the original guide. Romm presents this spoon method in an article she describes as generally safe for most adults and children, but she does not split the clove-and-teaspoon amounts by age on that page. For a child-specific garlic drink with clearer pediatric directions, use the garlic lemonade in the respiratory section. Under 6 months, Romm says a doctor should see a baby with any signs of infection, and her lemonade is not for babies under 6 months.</p></div></div>
+    <div class="field"><h4>Storage</h4><div><p>Mix fresh at the time of use. Do not store raw garlic in oil at room temperature, as the original primer already warns.</p></div></div>
+    <div class="field field-safety-and-pairing"><h4>Safety and pairing</h4><div><p>The same garlic cautions as in the core profile and Remedy 3 apply: irritation, reflux, bleeding-related precautions at higher intakes, and discussion before surgery. Romm advises checking with a health provider before using these herbs if you have an immune-system disorder or are pregnant; in the same article she also marks the lemonade as safe during pregnancy and breastfeeding. Follow the specific recipe notes and your clinician’s advice. Stop if stomach irritation is troublesome.</p></div></div>
+  </div>
+  <p class="source-line">Sources: Aviva Romm, “8 Safe and Effective Herbal Antibiotic Alternatives,” <a href="https://avivaromm.com/herbal-antibiotic-alternatives/">avivaromm.com/herbal-antibiotic-alternatives</a>. Traditional syrup context: Felter and Lloyd, <cite>King’s American Dispensatory</cite>, <a href="https://www.henriettes-herb.com/eclectic/kings/allium-sati_syru.html">Syrupus Allii</a>. Mary Bove’s clinical use of garlic syrup in children’s respiratory formulas is noted by Paul Bergner (see Additional herbalist voices) but is not used here as a recipe, because that interview gives no formula or measured child’s dose.</p>
+  <h4>Related kitchen preparation: thyme-garlic-onion honey <span class="badge-added">Added</span></h4>
+  <p>The Herbal Academy publishes a related infused honey that also uses thyme, which gives thyme a second, distinct preparation besides Remedy 5 (thyme-honey throat tea). In a clean dry jar, layer <strong>1 part fresh thyme sprigs, 2 parts peeled sliced onion, and 1 part peeled sliced or smashed garlic</strong>, then cover completely with raw honey. (“Parts” are by volume; if you use 1 cup onion, use ½ cup thyme and ½ cup garlic.) Cover with parchment under the lid, infuse at least a week, strain into a clean dry jar, and refrigerate up to 3 months. Adult use in that article: “Take a teaspoonful if you have a sore throat, cough, or cold,” or stir it into tea. <strong>Do not give this syrup to children under 1 year of age.</strong> The Academy also notes a botulism-spore caution when honey is diluted by garlic, and says some people add a splash of apple cider vinegar and check that the pH stays below 4.6. Source: Felicia Ruiz / Herbal Academy, “DIY Thyme Honey Recipe for Coughs, Colds, and Sore Throats,” 29 September 2025, <a href="https://theherbalacademy.com/blog/diy-thyme-honey-recipe/">theherbalacademy.com/blog/diy-thyme-honey-recipe</a>, also citing Bone and Mills (2013) and James Green (2000).</p>
+</article>
+
+<h3 id="system-respiratory" class="system-title">5.3 Respiratory system</h3>
+<p><strong>Focus herb 1: Thyme.</strong> [Traditional] The aromatic leaves are commonly used in warm drinks for mild throat irritation and cough-related discomfort.</p>
+<p><strong>Focus herb 2: Marshmallow root.</strong> [Traditional] Marshmallow contains mucilage, a slippery plant substance traditionally used to soothe irritated mucous membranes.</p>
+<article class="remedy" id="remedy-5">
+<h4 class="remedy-title">Remedy 5. Thyme-honey throat tea</h4>
+<div class="remedy-fields"><div class="field field-form"><h4>Form</h4><div><p>Infusion with honey.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-ingredients"><h4>Ingredients</h4><div><p>1 g dried thyme, 240 mL water, and 5 g honey (about 1 teaspoon).</p></div></div></div>
+<div class="remedy-fields"><div class="field field-preparation"><h4>Preparation</h4><div><p>Steep thyme, covered, in hot water for 12 minutes. Strain and cool until warm. Stir in honey.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-use-and-duration"><h4>Use and duration</h4><div><p>Adults, 60–120 mL slowly once or twice daily, up to 3 days. Stop if irritation worsens.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-children"><h4>Children</h4><div><p>Ages 2–6 and 6–12: the <strong>thyme medicinal preparation is not recommended</strong> here because a sufficiently reliable child-specific dose was not established. For a child older than 1 year with an uncomplicated cough, plain honey may be considered separately with appropriate pediatric advice; do not use honey under age 1. Under 2: no unsupervised herbal tea.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-storage"><h4>Storage</h4><div><p>Best fresh; refrigerate any leftovers for no longer than 24 hours.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-safety-and-pairing"><h4>Safety and pairing</h4><div><p>Pairs with adequate fluids. Avoid with thyme/oregano allergy, during pregnancy at medicinal strength, or while breastfeeding without professional approval. Honey affects carbohydrate intake in diabetes. Excess thyme tea may irritate the stomach. Never substitute essential thyme oil.<br>Adult infusion context: Michael Moore, <em>Herbal Materia Medica</em>. Safety: Gardner and McGuffin, <em>Botanical Safety Handbook</em>, thyme monograph.</p></div></div></div>
+</article>
+<article class="remedy" id="remedy-6">
+<h4 class="remedy-title">Remedy 6. Marshmallow root cold infusion</h4>
+<div class="remedy-fields"><div class="field field-form"><h4>Form</h4><div><p>Cold infusion.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-ingredients"><h4>Ingredients</h4><div><p>4 g dried cut marshmallow root and 250 mL cool drinking water.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-preparation"><h4>Preparation</h4><div><p>Combine in a clean covered jar. Refrigerate for 4–8 hours, shaking gently once. Strain thoroughly.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-use-and-duration"><h4>Use and duration</h4><div><p>Adults, 60–120 mL once or twice daily for up to 3 days as a soothing drink for mild throat dryness.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-children"><h4>Children</h4><div><p>Ages 2–6 and 6–12: not recommended without a pediatric-specific dosing source and clinician guidance. Under 2: not recommended.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-storage"><h4>Storage</h4><div><p>Refrigerate throughout preparation; discard remaining infusion after 24 hours.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-safety-and-pairing"><h4>Safety and pairing</h4><div><p>Pairs with adequate water. Its mucilage may interfere with medicine absorption, so take oral medication at least one hour before the herb and allow several hours afterward when possible. Avoid if allergic; consult before use in pregnancy, breastfeeding, or chronic illness. Rare digestive upset is possible.<br>Preparation: Jim McDonald, <em>Herbal Preparations</em>; Michael Moore, <em>Herbal Materia Medica</em>. Safety: Gardner and McGuffin, <em>Botanical Safety Handbook</em>, marshmallow monograph.</p></div></div></div>
+</article>
+
+<article class="remedy added-block" id="added-thyme-steam">
+  <h4>Suggested extra focus herb: Thyme herbal steam <span class="badge-added">Added</span></h4>
+  <p>This is a separate respiratory preparation from Remedy 5 (thyme-honey throat tea) and Remedy 6 (marshmallow cold infusion). Thyme is a traditional expectorant and cough herb in Hoffmann and in <cite>King’s American Dispensatory</cite>. The method below follows the Herbal Academy’s decongesting herbal steam, simplified to pantry thyme, which the Academy says you may do with herbs you have on hand. Essential oils are omitted in this version.</p>
+  <div class="remedy-fields">
+    <div class="field"><h4>Form</h4><div><p>Inhaled herbal steam, not swallowed.</p></div></div>
+    <div class="field"><h4>Ingredients</h4><div><p>1–3 tablespoons dried thyme (the Academy’s blended recipe uses 3 tablespoons thyme among other herbs; a simple thyme-only bowl uses the same water volume). 4–6 cups water, brought to a boil. A large heat-safe bowl and a towel.</p></div></div>
+    <div class="field"><h4>Preparation</h4><div><p>Place the thyme in a large bowl. Pour 4–6 cups of boiling water over the herb and cover the bowl briefly. Sit with a towel over your head to hold the steam. Keep your eyes closed and your face 5–10 inches from the water. Breathe the steam for no more than 10 minutes at a time. Adjust your distance or vent the towel so you do not overheat. Use caution before placing your face over the bowl so the first rush of steam does not burn you.</p></div></div>
+    <div class="field"><h4>Use and duration</h4><div><p>A short steam during ordinary congestion, as described by the Herbal Academy. This loosens mucus and moistens the airways; it is not a treatment for pneumonia or severe breathing difficulty, which need medical care (see the red-flag section).</p></div></div>
+    <div class="field field-children"><h4>Children</h4><div><p>The Herbal Academy says that for small children, omit essential oils altogether, and <strong>do not position a child’s face directly over the bowl</strong>. If a family steam is used at all, they advise making a tent with a blanket or sheet and sitting with the child around the bowl, not over it. A clearer pediatric method from Aviva Romm, which does not use a bowl, is given with the garlic lemonade below. Never leave a child alone with hot water.</p></div></div>
+    <div class="field"><h4>Storage</h4><div><p>Prepare at the time of use and discard the water after it cools.</p></div></div>
+    <div class="field field-safety-and-pairing"><h4>Safety and pairing</h4><div><p>Burn risk from steam and hot water is the main household hazard. Stop if you feel lightheaded, overheated, or irritated. People with asthma or very reactive airways should be cautious with concentrated aromatic steams and stop if breathing worsens. Seek urgent care for serious breathing trouble rather than continuing a steam.</p></div></div>
+  </div>
+  <p class="source-line">Sources: Christina Anthis / Herbal Academy, “Breathe Easier With a Decongesting Herbal Steam,” 24 November 2014, <a href="https://theherbalacademy.com/blog/breathe-easier-with-a-decongesting-herbal-salt-steam/">theherbalacademy.com</a>. Traditional thyme actions: Hoffmann, “Thyme,” <a href="https://healthy.net/2019/08/26/thyme-2/">healthy.net</a>; Felter and Lloyd, <a href="https://www.henriettes-herb.com/eclectic/kings/thymus.html">King’s American Dispensatory, Thymus</a>. Rosalee de la Forêt lists steam inhalation among thyme preparations: <a href="https://www.learningherbs.com/blog/thyme-uses">learningherbs.com/blog/thyme-uses</a>.</p>
+</article>
+
+<article class="remedy added-block" id="added-garlic-lemonade">
+  <h4>Kid-friendly alternative: Garlic lemonade <span class="badge-added">Added</span></h4>
+  <p>The original respiratory remedies (thyme-honey throat tea and marshmallow cold infusion) are marked <strong>N</strong> for ages 2–12 because the first report could not establish a sufficiently reliable pediatric dose for those exact recipes. Aviva Romm does publish a child-directed garlic drink for ordinary colds, used in her ear-infection-prevention article when a cold is starting. It is a different recipe from Remedy 3 (garlic-lemon broth): it uses water rather than broth, 2 cloves in a quart of water, a 30-minute steep, the juice of a whole lemon, and the direction to offer as much as the child can drink.</p>
+  <div class="remedy-fields">
+    <div class="field"><h4>Form</h4><div><p>Warm infused drink.</p></div></div>
+    <div class="field"><h4>Ingredients</h4><div><p>2 cloves fresh garlic, finely minced; boiling water to fill a 1-quart mason jar; juice of 1 whole lemon; honey to taste, or maple syrup for a baby under 1 year who is otherwise old enough for this drink.</p></div></div>
+    <div class="field"><h4>Preparation</h4><div><p>Romm’s method: finely mince 2 cloves of fresh garlic and place them in a 1-quart mason jar. Fill the jar with boiling water and cover for 30 minutes. Strain out the garlic. Add the juice of 1 whole lemon. Sweeten to taste with honey (or maple syrup for babies under 1 year). Give warm.</p></div></div>
+    <div class="field"><h4>Use and duration</h4><div><p>“Offer as much as the child can drink.” Romm presents this as short-term support at the start of a cold, alongside rest and ordinary care, not as a reason to delay medical evaluation when red flags are present.</p></div></div>
+    <div class="field field-children"><h4>Children</h4><div><p><strong>Do not give to babies under 6 months old.</strong> For babies under 1 year, use maple syrup instead of honey; honey is unsafe under 12 months. Romm also writes that a doctor should see babies less than 6 months old if they have any signs of an infection. For older children, she does not break this drink into teaspoon amounts; the published direction is to offer it warm, as much as the child will drink.</p></div></div>
+    <div class="field"><h4>Storage</h4><div><p>The original guide’s conservative household rule for fresh teas is to refrigerate promptly and use within 24 hours. That is a prudent approach here as well; Romm’s article does not state a separate shelf life.</p></div></div>
+    <div class="field field-safety-and-pairing"><h4>Safety and pairing</h4><div><p>Same garlic and reflux cautions as elsewhere. This does not replace care for breathing difficulty, dehydration, a fever in a young infant, or a worsening ear infection. In the same cluster of articles, Romm also describes a child thyme steam that does not use a bowl: place 7 drops of thyme essential oil on a washcloth, toss it under the stream of very hot water in the shower, close the bathroom door, and sit with the child in the steamy bathroom for about 5 minutes — not in the shower — twice daily. Essential oils can be strong; do not put them in the child’s bathwater or on the face, and skip this method if scent or steam worsens breathing.</p></div></div>
+  </div>
+  <p class="source-line">Source: Aviva Romm, “Preventing Kids’ Ear Infections Naturally,” <a href="https://avivaromm.com/preventing-kids-ear-infections/">avivaromm.com/preventing-kids-ear-infections</a>, and the same garlic-lemonade recipe in “8 Safe and Effective Herbal Antibiotic Alternatives,” <a href="https://avivaromm.com/herbal-antibiotic-alternatives/">avivaromm.com</a>. Romm also lists fresh garlic and fresh lemons for “garlic-honey-lemonade for cough,” and thyme essential oil “for vapor steams for cough,” in “Herbs for Kids: The Natural Home Medicine Cabinet,” <a href="https://avivaromm.com/natural-medicine-chest-kids-immunity/">avivaromm.com/natural-medicine-chest-kids-immunity</a>.</p>
+</article>
+
+<h3 id="system-cardiovascular" class="system-title">5.4 Cardiovascular and circulatory system</h3>
+<p><strong>Focus herb 1: Rosemary.</strong> [Traditional] Rosemary has a long history of use as a warming aromatic herb. Here it is used in a low-sodium meal rather than as a claimed treatment for poor circulation.</p>
+<p><strong>Focus herb 2: Hibiscus.</strong> [Modern study] Hibiscus tea has been studied in adults with mildly elevated blood pressure. Some trials suggest blood-pressure reductions, but the doses and durations used in research differ from the small introductory serving below, and results should not be treated as guaranteed.</p>
+<article class="remedy" id="remedy-7">
+<h4 class="remedy-title">Remedy 7. Rosemary and olive oil chickpeas</h4>
+<div class="remedy-fields"><div class="field field-form"><h4>Form</h4><div><p>Culinary preparation.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-ingredients"><h4>Ingredients</h4><div><p>150 g cooked, drained chickpeas; 0.5 g dried rosemary; 10 mL olive oil; 10 mL lemon juice; and 30 mL water.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-preparation"><h4>Preparation</h4><div><p>Warm chickpeas, rosemary, oil, and water in a covered skillet over low heat for 5–7 minutes. Remove from heat and add lemon.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-use-and-duration"><h4>Use and duration</h4><div><p>Adults, half the batch once as a meal or side dish, 2–3 times weekly if desired. This is food, so no formal herbal treatment cycle is needed.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-children"><h4>Children</h4><div><p>Ages 2–6, approximately 30 g chickpeas from the prepared batch. Ages 6–12, approximately 60 g. Ensure an age-appropriate texture. Under 2, use plain safely mashed chickpeas as food if already tolerated.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-storage"><h4>Storage</h4><div><p>Refrigerate up to 48 hours and reheat thoroughly.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-safety-and-pairing"><h4>Safety and pairing</h4><div><p>Pairs with vegetables and whole grains. Avoid rosemary or chickpea allergies and adjust legumes for digestive sensitivity. Rosemary in normal culinary amounts differs from medicinal concentrates. Review concentrated rosemary preparations with clinicians if pregnant, breastfeeding, or using medication affecting glucose.<br>Herb safety: Gardner and McGuffin, <em>Botanical Safety Handbook</em>, rosemary monograph. This is an original culinary recipe, not a validated cardiovascular intervention.</p></div></div></div>
+</article>
+<article class="remedy" id="remedy-8">
+<h4 class="remedy-title">Remedy 8. Ruby hibiscus tea</h4>
+<div class="remedy-fields"><div class="field field-form"><h4>Form</h4><div><p>Infusion.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-ingredients"><h4>Ingredients</h4><div><p>2 g dried <em>Hibiscus sabdariffa</em> calyces and 240 mL water.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-preparation"><h4>Preparation</h4><div><p>Steep in hot water, covered, for 10 minutes. Strain.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-use-and-duration"><h4>Use and duration</h4><div><p>Adults, 120 mL once daily for up to 5 days as an introductory tea, then pause and reassess. This short course is a tolerability trial, <strong>not</strong> the six-week clinical blood-pressure regimen.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-children"><h4>Children</h4><div><p>Ages 2–6 and 6–12: not recommended as a medicinal cardiovascular remedy. Under 2: not recommended.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-storage"><h4>Storage</h4><div><p>Refrigerate up to 24 hours.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-safety-and-pairing"><h4>Safety and pairing</h4><div><p>Pairs with an ordinary meal. Hibiscus may affect blood pressure, so discuss use with blood-pressure medicines or a tendency toward low blood pressure. AHPA also discusses potential medication interactions, including chloroquine and acetaminophen. Avoid medicinal use in pregnancy or breastfeeding without professional assessment. Possible effects include dizziness, acid-related stomach discomfort, and allergy.<br>Clinical evidence: McKay and colleagues, <em>Journal of Nutrition</em>, hibiscus tea trial. Safety: Gardner and McGuffin, <em>Botanical Safety Handbook</em>, hibiscus monograph.</p></div></div></div>
+</article>
+<h3 id="system-nervous" class="system-title">5.5 Nervous system: stress, sleep, and mood</h3>
+<p><strong>Focus herb 1: Lemon balm.</strong> [Traditional, some modern clinical interest] Lemon balm is a gentle aromatic herb traditionally used for nervous tension and digestive discomfort associated with stress.</p>
+<p><strong>Focus herb 2: Chamomile.</strong> [Traditional] Chamomile has a long history of use as a calming evening tea. Its pleasant flavor and familiarity make it a useful beginner herb, provided there is no relevant allergy.</p>
+<article class="remedy" id="remedy-9">
+<h4 class="remedy-title">Remedy 9. Lemon balm afternoon tea</h4>
+<div class="remedy-fields"><div class="field field-form"><h4>Form</h4><div><p>Infusion.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-ingredients"><h4>Ingredients</h4><div><p>1 g dried lemon balm leaf and 240 mL water.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-preparation"><h4>Preparation</h4><div><p>Pour hot water over the leaf. Cover 12 minutes, then strain.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-use-and-duration"><h4>Use and duration</h4><div><p>Adults, 120–240 mL once in the late afternoon for up to 5 days. Pause and reassess sleep, stress, and any side effects.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-children"><h4>Children</h4><div><p>Ages 2–6, 60 mL once daily. Ages 6–12, 120 mL once daily. This follows the conservative end of Romm's general tea guidance for lemon balm, not a clinical dose for this exact preparation. Under 2: not recommended unsupervised.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-storage"><h4>Storage</h4><div><p>Refrigerate up to 24 hours.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-safety-and-pairing"><h4>Safety and pairing</h4><div><p>Pairs with a quiet routine and reduced caffeine intake. Possible drowsiness or mild stomach upset. Discuss use with sedatives, thyroid medicines, and significant thyroid disease; thyroid concerns come mainly from preclinical findings, not established human interactions. Avoid medicinal use in pregnancy or breastfeeding without professional review.<br>Pediatric context: Aviva Romm, <em>Who's Afraid of Fever?</em> and <em>Herbs for Kids</em>. Adult preparation context: Michael Moore. Safety: Gardner and McGuffin, <em>Botanical Safety Handbook</em>.</p></div></div></div>
+</article>
+<article class="remedy" id="remedy-10">
+<h4 class="remedy-title">Remedy 10. Chamomile bedtime tea</h4>
+<div class="remedy-fields"><div class="field field-form"><h4>Form</h4><div><p>Flower infusion.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-ingredients"><h4>Ingredients</h4><div><p>1 g dried German chamomile flowers and 240 mL water.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-preparation"><h4>Preparation</h4><div><p>Steep covered for 10 minutes. Strain and allow to cool to a comfortable temperature.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-use-and-duration"><h4>Use and duration</h4><div><p>Adults, 120–240 mL approximately 30–60 minutes before bedtime, for 3–5 nights, then reassess.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-children"><h4>Children</h4><div><p>Ages 2–6, 60 mL once in the evening. Ages 6–12, 120 mL once in the evening. These are conservative household serving adaptations from Romm. Under 2: consult the child's clinician.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-storage"><h4>Storage</h4><div><p>Refrigerate up to 24 hours, although fresh is preferable.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-safety-and-pairing"><h4>Safety and pairing</h4><div><p>Pairs with consistent bedtime routines. Avoid with chamomile or serious ragweed/Asteraceae allergies. An important caution is possible bleeding interaction concern in people using warfarin; a case report has involved heavy chamomile use. Discuss medicinal use with anticoagulants, sedatives, pregnancy, and breastfeeding. Potential adverse effects include allergy and nausea.<br>Child-use context: Aviva Romm, <em>Herbs for Kids</em> and <em>Who's Afraid of Fever?</em>. Safety: Gardner and McGuffin, <em>Botanical Safety Handbook</em>, chamomile monograph.</p></div></div></div>
+</article>
+<h3 id="system-musculoskeletal" class="system-title">5.6 Musculoskeletal system: joints and inflammation</h3>
+<p><strong>Focus herb 1: Turmeric.</strong> [Traditional, modern study] Turmeric and curcumin have been studied for joint discomfort, especially in concentrated preparations. The small food recipe here should not be represented as equivalent to those trials.</p>
+<p><strong>Focus herb 2: Rosemary.</strong> [Traditional] Rosemary is used in aromatic external preparations for comfort around mildly tired muscles and joints.</p>
+<article class="remedy" id="remedy-11">
+<h4 class="remedy-title">Remedy 11. Turmeric golden milk</h4>
+<div class="remedy-fields"><div class="field field-form"><h4>Form</h4><div><p>Warm culinary drink.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-ingredients"><h4>Ingredients</h4><div><p>0.5 g ground turmeric, 240 mL unsweetened milk or fortified soy milk, and 5 mL olive oil.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-preparation"><h4>Preparation</h4><div><p>Whisk ingredients together in a small saucepan. Warm gently for 5 minutes without boiling vigorously. Stir before drinking.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-use-and-duration"><h4>Use and duration</h4><div><p>Adults, 120–240 mL once daily with food for up to 5 days, then pause. This is a culinary exposure, not a clinically tested anti-inflammatory dose.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-children"><h4>Children</h4><div><p>Ages 2–6 and 6–12: not recommended as a medicinal joint remedy. Small turmeric amounts in ordinary food are different. Under 2: no medicinal use.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-storage"><h4>Storage</h4><div><p>Refrigerate immediately; consume within 24 hours.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-safety-and-pairing"><h4>Safety and pairing</h4><div><p>Pairs with food containing fat. Avoid medicinal use with liver or biliary disease, gallbladder obstruction, or relevant medicine interactions without review. Monitor for abdominal pain, nausea, rash, dark urine, or jaundice and seek care if these occur. Concentrated curcumin products carry different risks than this recipe.<br>Traditional whole-herb dosing context: Michael Moore, <em>Herbal Materia Medica</em>. Safety: AHPA, <em>Botanical Safety Handbook</em>; Marles, <em>HerbalGram</em>, 2026 turmeric safety review.</p></div></div></div>
+</article>
+<article class="remedy" id="remedy-12">
+<h4 class="remedy-title">Remedy 12. Rosemary warm joint compress</h4>
+<div class="remedy-fields"><div class="field field-form"><h4>Form</h4><div><p>External compress.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-ingredients"><h4>Ingredients</h4><div><p>2 g dried rosemary, 500 mL water, and one clean cotton cloth.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-preparation"><h4>Preparation</h4><div><p>Pour hot water over rosemary, cover for 15 minutes, and strain. Cool until comfortably warm, not hot. Soak the cloth, wring it out, and place it on the affected intact skin.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-use-and-duration"><h4>Use and duration</h4><div><p>Adults, apply for 10 minutes up to twice daily for 2–3 days. Stop if pain, redness, or swelling increases.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-children"><h4>Children</h4><div><p>Ages 2–6 and 6–12: no specific pediatric medicinal compress protocol was established, so this preparation is not recommended here. Use a plain lukewarm cloth instead. Under 2: plain lukewarm cloth only.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-storage"><h4>Storage</h4><div><p>Use freshly prepared liquid; discard after the session.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-safety-and-pairing"><h4>Safety and pairing</h4><div><p>Pairs with appropriate rest and gentle movement. Do not apply to open wounds, numb skin, or an acutely hot, swollen joint. Avoid with rosemary allergy, and review medicinal rosemary use in pregnancy. Possible contact irritation or heat injury if too warm.<br>Herb preparation context: Michael Moore, <em>Herbal Materia Medica</em>. Topical preparation principles: Jim McDonald, <em>Herbal Preparations</em>. Safety: AHPA rosemary monograph.</p></div></div></div>
+</article>
+
+<article class="remedy added-block" id="added-ginger-compress">
+  <h4>Suggested extra focus herb: Warm ginger compress <span class="badge-added">Added</span></h4>
+  <p>This is a separate musculoskeletal preparation from Remedy 11 (turmeric golden milk) and Remedy 12 (rosemary warm joint compress). It gives ginger a topical role alongside its digestive tea in Remedy 1. The method follows the Herbal Academy’s general compress instructions; the Academy specifically lists ginger as a circulatory stimulant and antispasmodic used to help with muscle discomfort, and describes a family example that used powdered ginger in a strong infusion applied as a hot fomentation.</p>
+  <div class="remedy-fields">
+    <div class="field"><h4>Form</h4><div><p>Warm topical compress (a cloth soaked in a strong ginger tea).</p></div></div>
+    <div class="field"><h4>Ingredients</h4><div><p>3 to 4 tablespoons freshly grated ginger, or powdered ginger, per 1 cup (240 mL) water, which is the Academy’s general strength for compress teas. A clean cotton cloth. Optional: a towel and a comfortably warm water bottle if you are making a fomentation (a compress kept warm).</p></div></div>
+    <div class="field"><h4>Preparation</h4><div><p>Make a strong tea. For grated fresh root, simmer gently as a decoction, then cover and steep up to 30 minutes; for lighter or powdered material, the Academy directs pouring boiling water over the herb in a heat-proof container, covering, and steeping up to 30 minutes. Strain. Let the liquid cool until it is safely warm, not scalding. Soak the cloth, wring out the excess, and apply to intact skin over the uncomfortable area. Leave it in place for at least 10 minutes; longer can be more comfortable. When the cloth cools, re-warm it in the tea and reapply. The Academy notes that repeated application 2 to 3 times per day may be helpful, that extra liquid keeps in the refrigerator up to 2 days and can be re-warmed, and that a fomentation can be covered with a towel and a warm pack for 20 to 30 minutes. Rosemary Gladstar, as cited by the Academy, describes a fomentation as rotating hot and cold compresses.</p></div></div>
+    <div class="field"><h4>Use and duration</h4><div><p>Short-term comfort for occasional muscle or joint stiffness on intact skin. This is not a treatment for a hot, swollen joint with fever, a serious injury, or unexplained severe pain (see red flags).</p></div></div>
+    <div class="field field-children"><h4>Children</h4><div><p><strong>Not recommended as a pediatric joint remedy in this guide.</strong> The original turmeric golden milk and rosemary compress remain marked N for ages 2–12. Aviva Romm, Mary Bove, and Rosemary Gladstar were checked for a published, child-specific ginger compress dose; none was found. Romm does publish an internal ginger tea for aches that accompany colds and flu (1 tablespoon fresh grated ginger in 1 cup water, 10 minutes; up to 4 cups daily for adults, and up to 2 cups daily in pregnancy), but that is not a compress dose and is not converted here into a child’s joint recipe. Mary Bove’s published interview describes ginger-and-garlic poultices in her own adult pneumonia care, which is not a children’s dose. Keep compresses comfortably warm, never hot enough to burn, if a clinician later individualizes topical care.</p></div></div>
+    <div class="field"><h4>Storage</h4><div><p>Refrigerate leftover tea up to 2 days, as the Herbal Academy states, and discard if it smells off.</p></div></div>
+    <div class="field field-safety-and-pairing"><h4>Safety and pairing</h4><div><p>Use only on intact skin. Test the temperature on your own wrist first. Ginger can feel strongly warming; stop if the skin becomes irritated, blistered, or too hot. Do not use this to delay care for a suspected fracture, a joint that is red and feverish, or circulatory problems you have been told to treat as medical issues. Internal ginger cautions (reflux, gallstones, anticoagulants, bleeding disorders) remain relevant if tea is also drunk; this compress is a topical use of a strained tea.</p></div></div>
+  </div>
+  <p class="source-line">Sources: Angela Justis, “Herbal Compresses and Fomentations,” Herbal Academy, 30 January 2018, <a href="https://theherbalacademy.com/blog/herbal-compresses-and-fomentations/">theherbalacademy.com/blog/herbal-compresses-and-fomentations</a>, citing Rosemary Gladstar (2012), James Green (2000), and Aviva Romm, <cite>Naturally Healthy Babies and Children</cite> (2003), for the general usefulness of hot compresses in several comfort situations. Ginger tea for aches: Aviva Romm, <a href="https://avivaromm.com/herbal-antibiotic-alternatives/">avivaromm.com/herbal-antibiotic-alternatives</a>.</p>
+</article>
+
+<h3 id="system-lymphatic" class="system-title">5.7 Lymphatic system</h3>
+<p><strong>A necessary clarification:</strong> The lymphatic system does not require routine herbal “detoxification.” No good evidence establishes that these teas cleanse lymph, cure lymphadenitis, or treat swollen lymph nodes. The following are traditional formulas, offered as historical herbal practices rather than proven lymphatic treatments.</p>
+<p><strong>Focus herb 1: Cleavers.</strong> [Traditional] Cleavers is described in Western herbalism as a lymphatic and urinary-support herb, although direct human clinical evidence for lymphatic effects is limited.</p>
+<p><strong>Focus herb 2: Calendula.</strong> [Traditional] Calendula is traditionally associated with tissue and glandular support, especially in older Western herbal traditions.</p>
+<article class="remedy" id="remedy-13">
+<h4 class="remedy-title">Remedy 13. Cleavers cool infusion</h4>
+<div class="remedy-fields"><div class="field field-form"><h4>Form</h4><div><p>Cold infusion.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-ingredients"><h4>Ingredients</h4><div><p>2 g dried cleavers aerial parts and 250 mL cool water.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-preparation"><h4>Preparation</h4><div><p>Combine in a covered jar. Refrigerate for 4–6 hours and strain thoroughly.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-use-and-duration"><h4>Use and duration</h4><div><p>Adults, 120 mL once daily for no more than 3 days as a traditional tea. Stop rather than escalating dosage for swollen lymph nodes.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-children"><h4>Children</h4><div><p>Ages 2–6 and 6–12: not recommended due to insufficient pediatric medicinal dosing evidence. Under 2: not recommended.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-storage"><h4>Storage</h4><div><p>Refrigerate and discard after 24 hours.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-safety-and-pairing"><h4>Safety and pairing</h4><div><p>Pair with normal hydration, not other “detox” or diuretic blends. Avoid in pregnancy and breastfeeding without professional advice. Discuss use with kidney disease or diuretic medications. Allergic or digestive symptoms are possible. Enlarged, painful, persistent, or unexplained lymph nodes need medical assessment.<br>Traditional infusion context: Michael Moore, <em>Herbal Materia Medica</em>. Safety: Gardner and McGuffin, <em>Botanical Safety Handbook</em>, cleavers monograph.</p></div></div></div>
+</article>
+<article class="remedy" id="remedy-14">
+<h4 class="remedy-title">Remedy 14. Calendula glandular-support tea</h4>
+<div class="remedy-fields"><div class="field field-form"><h4>Form</h4><div><p>Flower infusion.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-ingredients"><h4>Ingredients</h4><div><p>1 g dried calendula flowers and 240 mL water.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-preparation"><h4>Preparation</h4><div><p>Pour hot water over flowers, steep covered for 10 minutes, and strain.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-use-and-duration"><h4>Use and duration</h4><div><p>Adults, 60–120 mL once daily for no more than 3 days as a traditional preparation. There is no established clinical dose for lymphatic treatment.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-children"><h4>Children</h4><div><p>Ages 2–6 and 6–12: not recommended for this indication. Under 2: not recommended.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-storage"><h4>Storage</h4><div><p>Refrigerate no longer than 24 hours.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-safety-and-pairing"><h4>Safety and pairing</h4><div><p>Can pair with food and ordinary hydration. Do not combine with other purported lymph cleanses. Avoid with calendula or serious Asteraceae-family allergies. Avoid internal medicinal use during pregnancy or breastfeeding unless specifically advised. Possible allergic reaction or mild gastrointestinal upset.<br>Traditional preparation context: Michael Moore and Western herbal materia medica. Safety: Gardner and McGuffin, <em>Botanical Safety Handbook</em>, calendula monograph.</p></div></div></div>
+</article>
+<div class="kids-note added-block" id="added-lymphatic-note">
+  <h4>About the kids column for the lymphatic remedies <span class="badge-added">Added</span></h4>
+  <p>The original cleavers cool infusion and calendula glandular-support tea are marked <strong>N</strong> for ages 2–12 because a sufficiently reliable pediatric dose could not be established. For this expansion, Aviva Romm’s publicly available pediatric articles, Mary Bove’s remarks as recorded by Paul Bergner, and Rosemary Gladstar citations on the open web were checked for a gentle, child-specific lymphatic tea using these herbs. No measured pediatric dose for an internal cleavers or calendula “glandular-support” tea was found in those sources. The original <strong>N</strong> therefore stands, rather than guessing a child’s dose from an adult infusion. A qualified pediatric herbalist or clinician can individualize care if it is appropriate.</p>
+</div>
+<h3 id="system-urinary" class="system-title">5.8 Urinary system</h3>
+<p><strong>Focus herb 1: Corn silk.</strong> [Traditional] Corn silk has long been prepared as a mild urinary tea. Traditional use does not establish that it treats urinary infection or kidney disease.</p>
+<p><strong>Focus herb 2: Goldenrod.</strong> [Traditional] Goldenrod has a long history as a urinary herb, sometimes used to encourage urine flow. It is not a substitute for assessment or treatment of a urinary tract infection.</p>
+<article class="remedy" id="remedy-15">
+<h4 class="remedy-title">Remedy 15. Corn silk comfort infusion</h4>
+<div class="remedy-fields"><div class="field field-form"><h4>Form</h4><div><p>Infusion.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-ingredients"><h4>Ingredients</h4><div><p>2 g dried corn silk and 240 mL water.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-preparation"><h4>Preparation</h4><div><p>Steep the corn silk covered in hot water for 15 minutes and strain.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-use-and-duration"><h4>Use and duration</h4><div><p>Adults, 60–120 mL once daily for up to 2 days, only when there are no signs of urinary infection or obstruction. Do not extend use to manage persistent symptoms.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-children"><h4>Children</h4><div><p>Ages 2–6 and 6–12: not recommended. Under 2: not recommended.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-storage"><h4>Storage</h4><div><p>Refrigerate up to 24 hours.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-safety-and-pairing"><h4>Safety and pairing</h4><div><p>Pair with ordinary hydration. Avoid in kidney disease, fluid restriction, or when using diuretics unless cleared by a clinician. Pregnancy and breastfeeding safety is inadequately established. Possible effects include increased urination, allergy, and fluid or electrolyte problems with inappropriate use.<br>Adult infusion context: Michael Moore, <em>Herbal Materia Medica</em>. Safety: Gardner and McGuffin, <em>Botanical Safety Handbook</em>, corn silk monograph.</p></div></div></div>
+</article>
+<article class="remedy" id="remedy-16">
+<h4 class="remedy-title">Remedy 16. Goldenrod short-course tea</h4>
+<div class="remedy-fields"><div class="field field-form"><h4>Form</h4><div><p>Infusion.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-ingredients"><h4>Ingredients</h4><div><p>1 g dried <em>Solidago virgaurea</em> aerial parts and 240 mL water.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-preparation"><h4>Preparation</h4><div><p>Cover with hot water, steep 15 minutes, and strain.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-use-and-duration"><h4>Use and duration</h4><div><p>Adults, 60–120 mL once daily for no more than 2 days. This is a conservative adaptation of traditional infusion use, not a UTI treatment regimen.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-children"><h4>Children</h4><div><p>Ages 2–6 and 6–12: not recommended. Under 2: not recommended.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-storage"><h4>Storage</h4><div><p>Refrigerate up to 24 hours.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-safety-and-pairing"><h4>Safety and pairing</h4><div><p>Pair with normal fluid intake. Avoid with significant kidney disease, edema due to cardiac or renal dysfunction, and known Asteraceae allergies. Discuss use with diuretics, pregnancy, and breastfeeding. Possible side effects include allergic reactions and increased urination.<br><strong>Important:</strong> Burning urination, fever, back or flank pain, blood in urine, or difficulty passing urine warrants prompt medical evaluation, not another herbal dose.<br>Adult dosing context: Michael Moore, <em>Herbal Materia Medica</em>, goldenrod infusion. Safety: Gardner and McGuffin, <em>Botanical Safety Handbook</em>, <em>Solidago virgaurea</em> monograph.</p></div></div></div>
+</article>
+<div class="kids-note added-block" id="added-urinary-note">
+  <h4>About the kids column for the urinary remedies <span class="badge-added">Added</span></h4>
+  <p>The original corn silk comfort infusion and goldenrod short-course tea are marked <strong>N</strong> for ages 2–12. The same pediatric authors were checked for a published, child-specific dose of either tea. None was found that was clear enough to copy here without guessing. Urinary burning with fever or back pain, blood in the urine, or a very unwell child is a reason for medical evaluation, as the original red-flag list already says — not a reason to invent a home-tea dose. The original <strong>N</strong> stands.</p>
+</div>
+<h3 id="system-integumentary" class="system-title">5.9 Integumentary system: skin</h3>
+<p><strong>Focus herb 1: Calendula.</strong> [Traditional] Calendula has a long history in external preparations intended to comfort dry or mildly irritated skin. It is well suited to a beginner salve project.</p>
+<p><strong>Focus herb 2: Oats.</strong> [Traditional and modern dermatologic use] Finely dispersed oats can provide a soothing bath or soak for intact, itchy, dry skin.</p>
+<article class="remedy" id="remedy-17">
+<h4 class="remedy-title">Remedy 17. Calendula skin salve</h4>
+<div class="remedy-fields"><div class="field field-form"><h4>Form</h4><div><p>Infused oil and salve.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-ingredients"><h4>Ingredients</h4><div><p>10 g fully dried calendula petals or flowers, 100 mL olive oil, and 10 g beeswax.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-preparation"><h4>Preparation</h4><div><p>1. Combine dried calendula and olive oil in a heat-safe vessel set over gently heated water.<br>2. Warm indirectly over low heat for 1–2 hours, avoiding boiling oil or introducing water.<br>3. Strain thoroughly through clean, dry cloth.<br>4. Place the infused oil back over gentle indirect heat and melt in beeswax.<br>5. Pour into clean, dry tins and allow to cool.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-use-and-duration"><h4>Use and duration</h4><div><p>Adults, a thin layer on a small area of dry, intact skin once or twice daily for up to 5 days. Stop if irritation develops.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-children"><h4>Children</h4><div><p>Ages 2–6, a very small smear, approximately rice-grain to pea size depending on the area. Ages 6–12, a pea-sized thin application. Topical amounts are practical application guidance, not clinically validated pediatric herbal doses. Patch-test first. For under 2, plain fragrance-free moisturizer is preferable without pediatric direction.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-storage"><h4>Storage</h4><div><p>In a clean, closed container away from heat and light, a conservative 2–3 months if made without introducing water. Discard sooner if smell, appearance, or texture changes.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-safety-and-pairing"><h4>Safety and pairing</h4><div><p>Pairs with gentle cleansing and fragrance-free skincare. Avoid calendula/Asteraceae allergy, infected skin, deep wounds, and severe burns. Possible contact dermatitis. Discuss use on damaged skin, during pregnancy, or on infants with a healthcare professional.<br>Oil and salve technique: Jim McDonald, <em>Herbal Preparations</em>. Safety: Gardner and McGuffin, <em>Botanical Safety Handbook</em>, calendula monograph.</p></div></div></div>
+</article>
+<article class="remedy" id="remedy-18">
+<h4 class="remedy-title">Remedy 18. Soothing oat bath</h4>
+<div class="remedy-fields"><div class="field field-form"><h4>Form</h4><div><p>Localized bath or soak.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-ingredients"><h4>Ingredients</h4><div><p>30 g finely ground plain oats in a clean cloth pouch, and approximately 10 L lukewarm water in a basin.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-preparation"><h4>Preparation</h4><div><p>Grind oats finely, preferably using a clean grinder. Place in a cloth pouch, suspend in lukewarm water, and squeeze gently for 2 minutes until the water looks milky. Soak the affected hands, feet, or other suitable area for 10 minutes. Pat dry and apply a bland moisturizer.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-use-and-duration"><h4>Use and duration</h4><div><p>Adults, once daily for up to 3 days when needed.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-children"><h4>Children</h4><div><p>Ages 2–6, use 15 g oats in 10 L water and soak for 5–10 minutes with supervision. Ages 6–12, 25 g oats in 10 L and soak 5–10 minutes. These are practical bath concentrations, not measured medicinal doses. Under 2: seek pediatric advice for persistent skin conditions.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-storage"><h4>Storage</h4><div><p>Single use only. Discard bath water and oats immediately.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-safety-and-pairing"><h4>Safety and pairing</h4><div><p>Pairs with fragrance-free moisturizers. Avoid with known oat allergy or irritated skin that reacts to the preparation. Choose certified gluten-free oats if cross-contact with gluten is a relevant concern. Be careful because oats can make the basin slippery. Stop for hives, increased redness, pain, or worsening skin symptoms.<br>Botanical safety: Gardner and McGuffin, <em>Botanical Safety Handbook</em>, <em>Avena sativa</em> monograph. The bath concentrations are conservative original home formulations.</p></div></div></div>
+</article>
+<h3 id="system-endocrine" class="system-title">5.10 Endocrine and metabolic system</h3>
+<p>This section focuses on food patterns that are compatible with everyday metabolic health, not treatment of thyroid disease, diabetes, adrenal disease, or hormone disorders.</p>
+<p><strong>Focus herb 1: Ceylon cinnamon.</strong> [Traditional and modern study] Cinnamon is being studied for metabolic effects, but evidence does not justify replacing glucose-lowering medicine with cinnamon, particularly at normal food doses.</p>
+<p><strong>Focus herb 2: Flaxseed.</strong> [Food and modern nutritional research] Ground flaxseed contributes fiber and plant lignans. Its practical value in this guide is as a food ingredient, not a proven hormone-balancing medication.</p>
+<article class="remedy" id="remedy-19">
+<h4 class="remedy-title">Remedy 19. Ceylon cinnamon oat bowl</h4>
+<div class="remedy-fields"><div class="field field-form"><h4>Form</h4><div><p>Culinary preparation.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-ingredients"><h4>Ingredients</h4><div><p>40 g rolled oats, 240 mL water, and 0.3 g ground Ceylon cinnamon.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-preparation"><h4>Preparation</h4><div><p>Place ingredients in a small saucepan. Simmer for 5–7 minutes, stirring until the oats soften. Allow to cool.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-use-and-duration"><h4>Use and duration</h4><div><p>Adults, one bowl at breakfast, as desired. No scheduled herbal break is needed when used as ordinary food.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-children"><h4>Children</h4><div><p>Ages 2–6, prepare with 20 g oats, 120 mL water, and 0.1 g Ceylon cinnamon. Ages 6–12, 30 g oats, 180 mL water, and 0.2 g cinnamon. These are culinary portions rather than pediatric medicinal doses. Under 2, use age-appropriate plain oats, with any spice introduced as normal food.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-storage"><h4>Storage</h4><div><p>Eat fresh or refrigerate up to 24 hours and reheat thoroughly.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-safety-and-pairing"><h4>Safety and pairing</h4><div><p>Pairs with nuts or fruit where age-appropriate and allergy-safe. Avoid cinnamon allergy. If taking diabetes medicines, do not rely on cinnamon to adjust glucose medication. Choose Ceylon rather than high-coumarin cassia for frequent use. Possible mouth irritation or allergy.<br>Botanical cautions: Gardner and McGuffin, <em>Botanical Safety Handbook</em>, Ceylon cinnamon monograph. Food amounts and recipe are original culinary guidance.</p></div></div></div>
+</article>
+<article class="remedy" id="remedy-20">
+<h4 class="remedy-title">Remedy 20. Flaxseed yogurt bowl</h4>
+<div class="remedy-fields"><div class="field field-form"><h4>Form</h4><div><p>Culinary preparation.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-ingredients"><h4>Ingredients</h4><div><p>5 g freshly ground flaxseed, 150 g plain yogurt, and 50 mL water.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-preparation"><h4>Preparation</h4><div><p>Stir the ground flaxseed into yogurt and water. Rest 10 minutes to allow it to hydrate, then eat.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-use-and-duration"><h4>Use and duration</h4><div><p>Adults, once daily for 3–5 days while assessing digestive tolerance. It may remain a normal food thereafter if well tolerated.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-children"><h4>Children</h4><div><p>Ages 2–6, 1 g ground flaxseed mixed into 75 g yogurt and 20 mL water. Ages 6–12, 2 g ground flaxseed mixed into 100 g yogurt and 30 mL water. Food portions only. Under 2, discuss suitable textures and ingredients with a pediatric clinician if needed.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-storage"><h4>Storage</h4><div><p>Best eaten immediately; refrigerate leftovers and use the same day.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-safety-and-pairing"><h4>Safety and pairing</h4><div><p>Pairs with ordinary meals and sufficient fluids. Avoid with bowel obstruction, swallowing difficulty, significant bowel narrowing, or flax allergy. Flax fiber can affect absorption of some medicines, so separate medicines from the meal when advised. Possible gas, bloating, or loose stools.<br>Safety and fiber precautions: Gardner and McGuffin, <em>Botanical Safety Handbook</em>, flaxseed monograph. Amounts are conservative food servings, not prescribed endocrine doses.</p></div></div></div>
+</article>
+<h3 id="system-reproductive" class="system-title">5.11 Reproductive system: female and male considerations</h3>
+<p><strong>Focus herb 1: Raspberry leaf, female considerations.</strong> [Traditional] Raspberry leaf is commonly used in Western herbal practice around menstruation and women's reproductive health. Evidence for relieving menstrual discomfort is limited, and pregnancy use needs individualized review.</p>
+<p><strong>Focus herb 2: Pumpkin seed, male considerations.</strong> [Food and modern research interest] Pumpkin seed is a nutrient-dense food. Some studies have evaluated pumpkin seed extracts or oils for urinary symptoms associated with benign prostatic enlargement, but those findings cannot be directly transferred to ordinary roasted seeds.</p>
+<article class="remedy" id="remedy-21">
+<h4 class="remedy-title">Remedy 21. Raspberry leaf cycle tea</h4>
+<div class="remedy-fields"><div class="field field-form"><h4>Form</h4><div><p>Leaf infusion.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-ingredients"><h4>Ingredients</h4><div><p>2 g dried red raspberry leaf and 240 mL water.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-preparation"><h4>Preparation</h4><div><p>Pour hot water over the leaves, cover for 20 minutes, and strain.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-use-and-duration"><h4>Use and duration</h4><div><p>Nonpregnant adults, 60–120 mL once daily for up to 3 days during the menstrual period, then stop. This is a traditional use, not a clinically proven treatment for painful periods.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-children"><h4>Children</h4><div><p>Ages 2–6 and 6–12: not recommended. For menstruating adolescents, seek age-specific guidance rather than adopting the adult formula. Under 2: not recommended.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-storage"><h4>Storage</h4><div><p>Refrigerate up to 24 hours.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-safety-and-pairing"><h4>Safety and pairing</h4><div><p>Pairs with adequate hydration and appropriate non-drug comfort measures. Avoid self-directed medicinal use if pregnant, trying to induce labor, or breastfeeding without clinical guidance. Consult for heavy bleeding, severe period pain, endometriosis concerns, or medication interactions. Possible digestive upset and allergy.<br>Traditional preparation context: Michael Moore, <em>Herbal Materia Medica</em>; Aviva Romm, reproductive herbal guidance. Safety and pregnancy evidence review: Gardner and McGuffin, <em>Botanical Safety Handbook</em>, raspberry leaf monograph.</p></div></div></div>
+</article>
+<article class="remedy" id="remedy-22">
+<h4 class="remedy-title">Remedy 22. Pumpkin seed nourishment topping</h4>
+<div class="remedy-fields"><div class="field field-form"><h4>Form</h4><div><p>Culinary preparation.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-ingredients"><h4>Ingredients</h4><div><p>15 g shelled pumpkin seeds, 150 g cooked vegetables or salad, and 5 mL olive oil.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-preparation"><h4>Preparation</h4><div><p>Warm pumpkin seeds in a dry skillet over low heat for 2–3 minutes, stirring and avoiding scorching. Allow to cool and scatter over vegetables with olive oil.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-use-and-duration"><h4>Use and duration</h4><div><p>Adults, one serving daily as food for 3–5 days, or regularly as part of a varied diet. No medicinal cycle is required.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-children"><h4>Children</h4><div><p>This is <strong>not recommended as a pediatric reproductive remedy</strong> for either 2–6 or 6–12. Small, properly crushed pumpkin seed portions may be offered as ordinary food when age-appropriate and safely tolerated. Whole seeds may present a choking risk for younger children. Under 2: avoid whole seeds.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-storage"><h4>Storage</h4><div><p>Serve fresh. Refrigerate the complete vegetable dish and use within 24 hours.</p></div></div></div>
+<div class="remedy-fields"><div class="field field-safety-and-pairing"><h4>Safety and pairing</h4><div><p>Pairs with vegetables, grains, or unsweetened yogurt. Avoid pumpkin seed allergy. Seeds are calorie-dense and may cause digestive discomfort if eaten in excess. This food recipe has no known clinically established dose for treating prostate enlargement, infertility, or urinary symptoms. Seek assessment for new urinary hesitancy, painful urination, blood in urine, pelvic pain, or testicular concerns.<br>This is a food recipe, not a verified phytotherapy dose. Whole-seed therapeutic efficacy should not be inferred from studies on standardized pumpkin seed extracts or oils.<br>---</p></div></div></div>
+</article>
+<div class="kids-note added-block" id="added-reproductive-note">
+  <h4>About the kids column for the reproductive remedies <span class="badge-added">Added</span></h4>
+  <p>Raspberry leaf cycle tea remains <strong>N</strong> for children. Aviva Romm’s publicly available writing on raspberry leaf is in the setting of women’s health, not as a general children’s tonic, and no pediatric dose for this recipe was added. Pumpkin seed nourishment topping remains <strong>food only</strong>, as in the original table. Ordinary food amounts of pumpkin seeds, where they are a safe food for the child, do not require a medicinal dose.</p>
+</div>
+<h2 id="pantry">6. Starter pantry shopping list</h2>
+<p>The quantities below are enough to try most of the guide in small batches, without buying large inventories that will lose potency before use.</p>
+
+<div class="pantry-box" id="pantry-checklist">
+  <div class="pantry-head"><strong>Interactive pantry checklist</strong><span class="pantry-count" id="pantry-count"></span></div>
+  <div class="pantry-group"><h4>Your six core herbs</h4><div class="pantry-items"><label class="check"><input type="checkbox" data-k="0-0"><span>Fresh garlic, 2 bulbs</span></label><label class="check"><input type="checkbox" data-k="0-1"><span>Fresh ginger, 100 g</span></label><label class="check"><input type="checkbox" data-k="0-2"><span>Ground turmeric, 30 g</span></label><label class="check"><input type="checkbox" data-k="0-3"><span>True Ceylon cinnamon, 25 g</span></label><label class="check"><input type="checkbox" data-k="0-4"><span>Dried rosemary, 20 g</span></label><label class="check"><input type="checkbox" data-k="0-5"><span>Dried thyme, 20 g</span></label></div></div><div class="pantry-group"><h4>Additional herbs and plant foods</h4><div class="pantry-items"><label class="check"><input type="checkbox" data-k="1-0"><span>Fennel seeds, 25 g</span></label><label class="check"><input type="checkbox" data-k="1-1"><span>Dried elderflowers, 25 g</span></label><label class="check"><input type="checkbox" data-k="1-2"><span>Dried marshmallow root, 25 g</span></label><label class="check"><input type="checkbox" data-k="1-3"><span>Dried hibiscus calyces, 25 g</span></label><label class="check"><input type="checkbox" data-k="1-4"><span>Dried lemon balm, 25 g</span></label><label class="check"><input type="checkbox" data-k="1-5"><span>Dried German chamomile, 25 g</span></label><label class="check"><input type="checkbox" data-k="1-6"><span>Dried cleavers, 25 g</span></label><label class="check"><input type="checkbox" data-k="1-7"><span>Dried calendula, 30 g</span></label><label class="check"><input type="checkbox" data-k="1-8"><span>Dried corn silk, 25 g</span></label><label class="check"><input type="checkbox" data-k="1-9"><span>Dried goldenrod, 25 g</span></label><label class="check"><input type="checkbox" data-k="1-10"><span>Dried raspberry leaf, 25 g</span></label><label class="check"><input type="checkbox" data-k="1-11"><span>Rolled oats, 250 g</span></label><label class="check"><input type="checkbox" data-k="1-12"><span>Ground or whole flaxseed, 100 g</span></label><label class="check"><input type="checkbox" data-k="1-13"><span>Shelled pumpkin seeds, 100 g</span></label><label class="check"><input type="checkbox" data-k="1-14"><span>Cooked chickpeas, 1 can</span></label></div></div><div class="pantry-group"><h4>Carriers and kitchen ingredients</h4><div class="pantry-items"><label class="check"><input type="checkbox" data-k="2-0"><span>Olive oil, 250 mL</span></label><label class="check"><input type="checkbox" data-k="2-1"><span>Unsweetened milk or soy milk, 500 mL</span></label><label class="check"><input type="checkbox" data-k="2-2"><span>Plain yogurt, 500 g</span></label><label class="check"><input type="checkbox" data-k="2-3"><span>Vegetable broth, 500 mL</span></label><label class="check"><input type="checkbox" data-k="2-4"><span>Fresh lemons, 2–3</span></label><label class="check"><input type="checkbox" data-k="2-5"><span>Honey, 250 g (optional; never under age 1)</span></label><label class="check"><input type="checkbox" data-k="2-6"><span>Beeswax, 30 g</span></label><label class="check"><input type="checkbox" data-k="2-7"><span>Apple cider vinegar, 250 mL (optional for later oxymels)</span></label><label class="check"><input type="checkbox" data-k="2-8"><span>Food-grade vegetable glycerin, 250 mL (optional)</span></label><label class="check"><input type="checkbox" data-k="2-9"><span>Food-grade neutral alcohol, appropriate proof (optional; adult tincture making only)</span></label></div></div><div class="pantry-group"><h4>Tools</h4><div class="pantry-items"><label class="check"><input type="checkbox" data-k="3-0"><span>Digital scale with 0.1 g resolution</span></label><label class="check"><input type="checkbox" data-k="3-1"><span>Measuring jug marked in mL</span></label><label class="check"><input type="checkbox" data-k="3-2"><span>Small saucepan with lid</span></label><label class="check"><input type="checkbox" data-k="3-3"><span>Heat-safe double-boiler setup</span></label><label class="check"><input type="checkbox" data-k="3-4"><span>Fine-mesh tea strainer</span></label><label class="check"><input type="checkbox" data-k="3-5"><span>Clean glass jars with lids</span></label><label class="check"><input type="checkbox" data-k="3-6"><span>Dry amber bottles and salve tins</span></label><label class="check"><input type="checkbox" data-k="3-7"><span>Labels and permanent marker</span></label><label class="check"><input type="checkbox" data-k="3-8"><span>Clean cotton or muslin cloths</span></label><label class="check"><input type="checkbox" data-k="3-9"><span>Small grinder for oats and seeds</span></label></div></div>
+  <div class="pantry-group added-block">
+    <h4>Optional extras for the added remedies <span class="badge-added">Added</span></h4>
+    <div class="pantry-items">
+      <label class="check"><input type="checkbox" data-k="a0"><span>Extra fresh garlic (for garlic-honey and garlic lemonade)</span></label>
+      <label class="check"><input type="checkbox" data-k="a1"><span>Extra fresh ginger (for a warm ginger compress)</span></label>
+      <label class="check"><input type="checkbox" data-k="a2"><span>Extra dried or fresh thyme (for a thyme steam)</span></label>
+      <label class="check"><input type="checkbox" data-k="a3"><span>One onion (optional, for thyme-garlic-onion honey)</span></label>
+      <label class="check"><input type="checkbox" data-k="a4"><span>Clean cotton cloths and a large heat-safe bowl (compresses and steams)</span></label>
+    </div>
+  </div>
+  <div class="pantry-actions no-print">
+    <button type="button" id="pantry-copy">Copy checklist</button>
+    <button type="button" id="pantry-clear" class="secondary">Clear</button>
+  </div>
+</div>
+
+<p>You do not need tincture supplies, glycerin, vinegar, or alcohol for the 22 recipes. They are included only for learning the additional preparation methods in the primer.</p>
+<h3 id="quality">Choosing good-quality herbs</h3>
+<p><strong>Organic:</strong> Organic sourcing can reduce certain pesticide concerns, but organic status alone does not verify botanical identity, microbial cleanliness, or heavy-metal safety.</p>
+<p><strong>Fresh versus dried:</strong> Fresh ginger and garlic should feel firm, without mold or sliminess. Dried leaves and flowers should retain recognizable color and aroma, and should not smell musty. Discard herbs that are damp, moldy, or contaminated.</p>
+<p><strong>Turmeric:</strong> Look for a clearly identified <em>Curcuma longa</em> product, preferably from a supplier that can document identity and contaminant testing. Color alone cannot confirm quality. [Verified] The American Botanical Council's adulteration reporting describes contamination and adulteration concerns involving turmeric powder, including prohibited dyes and lead chromate.</p>
+<p><strong>Cinnamon:</strong> Choose labeling that explicitly identifies <em>Cinnamomum verum</em> or <em>C. zeylanicum</em>. “Cinnamon” alone often does not identify the species.</p>
+<p><strong>Buying online:</strong> Prefer sellers that give the Latin botanical name, plant part, harvest or batch identification, and testing information. Buy quantities you can use while aromatic quality remains good, rather than stocking a multi-year supply.</p>
+<hr>
+<h2 id="labeling">7. Labeling tips, record-keeping, and red flags</h2>
+<h3 id="jar-label">What to write on every jar</h3>
+<div class="label-card"><p class="kicker">EXAMPLE HERBAL PREPARATION LABEL</p><h3>Calendula Skin Salve</h3></div>
+<hr>
+<p><strong>Botanical:</strong> Calendula officinalis, dried flowers<br><strong>Batch:</strong> CAL-001</p>
+<div class="remedy-fields"><div class="field field-ingredients"><h4>Ingredients</h4><div><p>10 g dried calendula, 100 mL olive oil, 10 g beeswax<br><strong>Made:</strong> November 19, 2026<br><strong>Review/discard by:</strong> February 19, 2027, or sooner if spoiled<br><strong>Route:</strong> External use only, intact skin<br><strong>Cautions:</strong> Patch test; avoid if allergic to calendula/Asteraceae</p></div></div><div class="field field-storage"><h4>Storage</h4><div><p>Closed, cool, dry, away from sunlight<br>Record the actual ingredients, the exact herb supplier and lot number, the date prepared, the volume or yield, and any problems encountered. If you later alter a recipe, use a new batch identifier.</p></div></div></div>
+<h3 id="remedy-log">A simple remedy log</h3>
+<div class="table-wrap"><table><thead><tr><th>Date</th><th>Remedy / batch</th><th>Serving or application</th><th>Reason used</th><th>Response / side effects</th></tr></thead><tbody><tr><td>Nov. 19</td><td>Ginger decoction GIN-001</td><td>60 mL</td><td>Occasional mild nausea</td><td>Record after use</td></tr><tr><td>Nov. 20</td><td>Chamomile tea CHA-001</td><td>120 mL</td><td>Evening relaxation</td><td>Record after use</td></tr></tbody></table></div>
+<p>Avoid making changes to prescribed medications based on how you feel after a single herbal preparation. If you measure blood pressure or glucose, record those values separately with timestamps, and review trends with the appropriate clinician.</p>
+<h3 id="red-flags">When home remedies are not enough</h3>
+<p><strong>Get emergency help for:</strong> Chest pain, severe trouble breathing, stroke symptoms, fainting with concerning symptoms, severe allergic reactions, uncontrolled bleeding, or severe sudden abdominal pain. Call 911 in the United States.</p>
+<hr>
+<p><strong>Seek prompt medical evaluation for:</strong> Fever with severe headache, stiff neck, dehydration, persistent vomiting, rapidly worsening illness, painful swollen joints with fever, urinary burning with fever or back pain, blood in urine or stool, or severe menstrual or pelvic pain.</p>
+<hr>
+<p><strong>Special considerations for children:</strong> Fever in a baby under 3 months, breathing difficulty, reduced responsiveness, or significant dehydration requires urgent medical evaluation. Do not delay care to trial herbal teas.</p>
+<hr>
+<p><strong>Seek individualized advice before medicinal herbs if you:</strong> Are pregnant or breastfeeding; take anticoagulants, antiplatelet medicines, diabetes or blood-pressure medication; have liver, kidney, or gallbladder disease; or have an upcoming surgery. Normal food seasoning does not necessarily have the same risks as concentrated extracts.</p>
+<p>Stop a new herb if you develop a rash, wheezing, dizziness, persistent nausea, unusual bruising, or another unexpected symptom. Seek medical attention as appropriate.</p>
+<hr>
+<h2 id="sources">8. Sources and research notes</h2>
+<p>The following sources formed the principal verifiable backbone of this report.</p>
+<div class="table-wrap"><table><thead><tr><th>Source</th><th>What I used it for</th></tr></thead><tbody><tr><td>Zoë Gardner and Michael McGuffin, eds., <em>American Herbal Products Association's Botanical Safety Handbook</em>, 2nd ed., 2013</td><td>Species-specific precautions, pregnancy and breastfeeding discussions, adverse effects, and herb-drug interaction classifications</td></tr><tr><td>Michael Moore, <em>Herbal Materia Medica</em>, 5th ed., 1995</td><td>Traditional adult infusion, decoction, tincture, and plant preparation information</td></tr><tr><td>Jim McDonald, <em>Herbal Preparations</em>, herbcraft.org</td><td>Home extraction methods, teas, infusions, oils, and salves</td></tr><tr><td>Aviva Romm, <em>Who's Afraid of Fever? An MD's Natural Approach to Fever in Children</em></td><td>Examples of gentle herbs used in children and broad tea-serving guidance</td></tr><tr><td>Aviva Romm, <em>Herbs for Kids: The Natural Home Medicine Cabinet</em></td><td>Pediatric context for chamomile and lemon balm</td></tr><tr><td>James Green, <em>The Herbal Medicine-Maker's Handbook</em>, 2000</td><td>Extraction ratios and glycerite preparation principles</td></tr><tr><td>Robin J. Marles, <em>HerbalGram</em>, issue 146, 2026</td><td>Recent turmeric and curcuminoid safety assessment</td></tr><tr><td>McKay and colleagues, <em>Journal of Nutrition</em>, 2010</td><td>Clinical trial of hibiscus tea in adults with prehypertension or mild hypertension</td></tr><tr><td>American Botanical Council, Botanical Adulterants Prevention Program</td><td>Turmeric adulteration and botanical-quality concerns</td></tr><tr><td><em>Journal of Agricultural and Food Chemistry</em>, research on coumarin in cassia cinnamon, 2013</td><td>Species and coumarin distinction</td></tr></tbody></table></div>
+<p>Key directly consulted resources:</p>
+<ul><li><a href="https://www.swsbm.com/ManualsMM/MatMed5.pdf" rel="noopener noreferrer">Michael Moore: Herbal Materia Medica</a></li><li><a href="https://www.herbcraft.org/writings/preparations" rel="noopener noreferrer">Jim McDonald: Herbal Preparations</a></li><li><a href="https://avivaromm.com/natural-fever-treatments/" rel="noopener noreferrer">Aviva Romm: Natural Fever Treatments for Children</a></li><li><a href="https://avivaromm.com/natural-medicine-chest-kids-immunity/" rel="noopener noreferrer">Aviva Romm: Herbs for Kids</a></li><li><a href="https://umb.herbalgram.org/media/p0vp10at/hg146online.pdf" rel="noopener noreferrer">HerbalGram Issue 146 (2026), turmeric safety review</a></li><li><a href="https://jn.nutrition.org/article/S0022-3166%2822%2906963-2/fulltext" rel="noopener noreferrer">Hibiscus Tea and Blood Pressure: Clinical Trial</a></li><li><a href="https://pubs.acs.org/doi/full/10.1021/jf4005862" rel="noopener noreferrer">Cassia Cinnamon as a Source of Coumarin</a></li></ul>
+<p><strong>Source limitations:</strong> The AHPA handbook reviewed is the 2013 second edition. It remains useful for established safety information but cannot capture every interaction or adverse event reported subsequently. I therefore supplemented its turmeric findings with 2026 reporting. I did not independently authenticate the full contents of all 20 requested books, including several by Rosemary Gladstar, Mary Bove, David Hoffmann, Matthew Wood, and Kerry Bone and Simon Mills. Exact pediatric formulas were consequently omitted where I lacked a reliable directly checked source.</p>
+<p>The adult household preparation quantities, durations, and storage limits in this report are often <strong>conservative original adaptations</strong>, informed by the referenced herbal preparation methods and safety monographs. They should not be mistaken for individually studied, therapeutically validated recipes.</p>
+
+<section class="added-block" id="added-sources">
+  <h3>Sources added in this expansion <span class="badge-added">Added</span></h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Source</th><th>What it was used for</th></tr></thead>
+    <tbody>
+      <tr><td>Aviva Romm, “8 Safe and Effective Herbal Antibiotic Alternatives,” avivaromm.com</td><td>Garlic-honey spoon, garlic lemonade, ginger tea amounts, and general child/adult safety notes</td></tr>
+      <tr><td>Aviva Romm, “Preventing Kids’ Ear Infections Naturally,” avivaromm.com</td><td>Garlic lemonade method and the pediatric thyme bathroom steam</td></tr>
+      <tr><td>Aviva Romm, “Herbs for Kids: The Natural Home Medicine Cabinet,” avivaromm.com</td><td>Confirmation that garlic, ginger, lemons, honey (over age 1), and thyme oil for steams appear in her children’s cabinet</td></tr>
+      <tr><td>Paul Bergner, “Allium sativum: Practitioner interviews,” <cite>Medical Herbalism</cite> / medherb.com, including Mary Bove</td><td>Clinical context for garlic syrup and garlic with thyme; no child dose copied, because none was published there</td></tr>
+      <tr><td>Rosalee de la Forêt, LearningHerbs plant profiles for garlic, ginger, thyme, and rosemary; <cite>Alchemy of Herbs</cite> (2017)</td><td>Energetics, traditional uses, and the Winston/Kuhn ginger tincture citation</td></tr>
+      <tr><td>David L. Hoffmann, thyme and rosemary monographs on healthy.net</td><td>Actions and his stated adult infusion and tincture amounts</td></tr>
+      <tr><td>Felter and Lloyd, <cite>King’s American Dispensatory</cite> (1898), via henriettes-herb.com</td><td>Historical garlic, garlic syrup, thyme, and cinnamon/ginger monographs</td></tr>
+      <tr><td>Maud Grieve, <cite>A Modern Herbal</cite> (1931), botanical.com</td><td>Traditional garlic and wild-thyme-with-rosemary remarks</td></tr>
+      <tr><td>Susun S. Weed, “Ten Top Tips for Avoiding the Flu,” 2006, susunweed.com</td><td>Everyday food and tea use of garlic, ginger, thyme, and rosemary</td></tr>
+      <tr><td>Herbal Academy: thyme-garlic-onion honey; decongesting herbal steam; compresses and fomentations (citing Gladstar 2012, Green 2000, Romm 2003, and Bone and Mills 2013)</td><td>Added honey, steam, and ginger-compress methods and safety notes</td></tr>
+      <tr><td>Chestnut School of Herbal Medicine, “Herbs for Kids” and immune-stimulant articles, chestnutherbs.com</td><td>General pediatric herbalism context; no new measured dose taken from those pages</td></tr>
+      <tr><td>American Herbalists Guild, americanherbalistsguild.com</td><td>Referral point for individualized professional herbal care</td></tr>
+      <tr><td>David Winston and Merrily Kuhn, <cite>Herbal Therapy &amp; Supplements</cite>, as cited by de la Forêt</td><td>Fresh ginger tincture ratio and adult mL dose</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>The original source-limitations paragraph still stands: several requested books, including the full texts of Gladstar, Bove, Hoffmann’s <cite>Medical Herbalism</cite>, Matthew Wood, Bone and Mills, Easley and Horne, and Cech, were not independently authenticated page by page. This expansion used only the public excerpts and pages listed above, and it does not invent the missing doses.</p>
+</section>
+
+<h3 id="final">Final recommendation</h3>
+<p>Use the guide as a <strong>small-batch, one-remedy-at-a-time learning reference</strong>. Its strongest beginner material is the gentle food-based preparations, selected mild teas, and intact-skin topical recipes. The lymphatic, urinary, endocrine, and reproductive sections require the most caution about overinterpreting traditional claims.</p>
+<p>If you follow only three principles, make them these: identify every plant correctly, keep medicinal preparations separate from ordinary culinary use when assessing risk, and never calculate a child's herbal dose from an adult dose unless the plant and preparation are independently established as appropriate for pediatric use.</p>
+      </div>
+      <footer class="site">
+        <p>Prepared as a self-contained page for personal preview. Nothing on this page has been published to GitHub Pages yet. Print from your browser for a paper copy; the print stylesheet hides the contents panel and keeps remedy cards together.</p>
+      </footer>
+    </main>
+  </div>
+  <script>
+
+(function(){
+  const toc = document.querySelector('.toc');
+  const btn = document.querySelector('.toc-toggle');
+  if (btn && toc) {
+    btn.addEventListener('click', () => {
+      const open = toc.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  const boxes = document.querySelectorAll('#pantry-checklist input[type=checkbox]');
+  const count = document.getElementById('pantry-count');
+  function refresh(){
+    const n = [...boxes].filter(b => b.checked).length;
+    if (count) count.textContent = n + ' / ' + boxes.length + ' checked';
+  }
+  boxes.forEach(b => b.addEventListener('change', refresh));
+  refresh();
+  const copy = document.getElementById('pantry-copy');
+  if (copy) copy.addEventListener('click', async () => {
+    const lines = [];
+    document.querySelectorAll('.pantry-group').forEach(g => {
+      const title = g.querySelector('h4');
+      if (title) lines.push(title.innerText.replace(/\s+Added\s*$/,'').trim());
+      g.querySelectorAll('label.check').forEach(l => {
+        const on = l.querySelector('input').checked;
+        lines.push((on ? '[x] ' : '[ ] ') + l.innerText.trim());
+      });
+      lines.push('');
+    });
+    try { await navigator.clipboard.writeText(lines.join('\n')); copy.textContent = 'Copied'; setTimeout(()=>copy.textContent='Copy checklist', 1500); }
+    catch(e){ copy.textContent = 'Copy failed'; }
+  });
+  const clear = document.getElementById('pantry-clear');
+  if (clear) clear.addEventListener('click', () => { boxes.forEach(b => b.checked = false); refresh(); });
+})();
+
+  </script>
+</body>
+</html>
